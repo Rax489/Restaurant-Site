@@ -36,3 +36,15 @@
     margin-left: 10px;
     margin-right: 10px;
 }
+
+#banner-image {
+    width: 100%;
+    height: auto;
+    border-bottom: 3px solid black;
+    border-top: 3px solid black;
+}
+
+#number {
+    font-family: "Roboto Condensed";
+    color: black;
+}
