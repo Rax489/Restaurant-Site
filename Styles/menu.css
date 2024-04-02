@@ -4,6 +4,10 @@
     padding: 15px;
 }
 
+header {
+    margin-bottom: 50px;
+}
+
 .navbar {
     display: flex;
     justify-content: center;
@@ -90,32 +94,43 @@ footer {
 
 h1 {
     display: inline-block;
-    border-bottom: 3px solid #041280;
+    border-bottom: 6px solid #041280;
     font-family: "Roboto Condensed";
+    padding-left: 200px;
+    padding-right: 200px;
+}
+
+.separator {
+    border-bottom: 4px solid #041280;
+    margin-left: 800px;
 }
 
 .category-content {
-    background-color: rgba(255, 255, 255, 1);
-    border: 3px solid #041280;
+    background-color: rgba(255, 255, 255, 0.9);
     padding: 10px;
-    border-radius: 5px;
     position: absolute;
-    top: 15%;
+    top: 11%;
     left: 80%;
     right: 0;
     margin: auto;
     z-index: 1;
-    height: 40vh;
+    height: 60vh;
     width: 400px;
+    box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.1);
 }
 
-#category-container {
+#category-salad {
     position: relative;
-    width: 40%;
+    width: 75%;
+    margin-bottom: 70px;
+    margin-top: 70px;
+    margin-left: 82px;
+    padding: 0;
 }
 
 .category-heading {
     font-family: "Roboto Condensed";
+    font-weight: bold;
 }
 
 .category-description {
@@ -124,4 +139,99 @@ h1 {
 
 #salad-image {
     width: 1500px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+#salad-button {
+    background-color: #041280;
+    color: white;
+    border-radius: 0;
+    font-weight: bold;
+}
+
+#salad-button:hover {
+    background-color: white;
+    color: #041280;
+    border-color: #041280;
+}
+
+#category-appetizer {
+    position: relative;
+    width: 75%;
+    margin-bottom: 70px;
+    margin-top: 70px;
+    margin-left: 82px;
+    padding: 0;
+}
+
+#appetizer-image {
+    width: 1500px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+#appetizer-button {
+    background-color: #041280;
+    color: white;
+    border-radius: 0;
+    font-weight: bold;
+}
+
+#appetizer-button:hover {
+    background-color: white;
+    color: #041280;
+    border-color: #041280;
+}
+
+#category-main-dishes {
+    position: relative;
+    width: 75%;
+    margin-bottom: 70px;
+    margin-top: 70px;
+    margin-left: 82px;
+    padding: 0;
+}
+
+#main-dishes-image {
+    width: 1500px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+#main-dishes-button {
+    background-color: #041280;
+    color: white;
+    border-radius: 0;
+    font-weight: bold;
+}
+
+#main-dishes-button:hover {
+    background-color: white;
+    color: #041280;
+    border-color: #041280;
+}
+
+#category-desserts {
+    position: relative;
+    width: 75%;
+    margin-bottom: 70px;
+    margin-top: 70px;
+    margin-left: 82px;
+    padding: 0;
+}
+
+#desserts-image {
+    width: 1500px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+#desserts-button {
+    background-color: #041280;
+    color: white;
+    border-radius: 0;
+    font-weight: bold;
+}
+
+#desserts-button:hover {
+    background-color: white;
+    color: #041280;
+    border-color: #041280;
 }
