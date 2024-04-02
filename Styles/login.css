@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+    font-family: "Roboto Condensed";
+    background-color: white !important;
+    padding: 0;
+    margin: 0;
+}
+
+#login-section {
+    width: 80%;
+    max-width: 1500px;
+    margin: auto;
+    padding: 20px;
+    height: 100vh; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+.login-inputs {
+    background-color: #041280 !important;
+}
+
+.image-section {
+    background-image: url('../Images/loginImg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.login-inputs h2{
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 25px;
+}
+
+label {
+    padding-bottom: 5px;
+    width: 100%;
+    text-align: center;
+    font-style: italic;
+    display: block;
+    font-weight: bold;
+    color: white;
+}
+
+#email:focus,
+#password:focus {
+    outline: none !important;
+    box-shadow: none;
+}
+
+#email,
+#password {
+    width: 100%;
+    display: block;
+    background-color: transparent;
+    border: none;
+    border-bottom: 3px solid white;
+    border-radius: 0;
+    color: white;
+}
+
+.line-input{
+    border: none;
+}
+
+.btn-block {
+    width: 100%;
+    margin-top: 20px;
+}
+
+#login-button {
+    background-color: white;
+    color: #041280;
+    font-weight: bold;
+    border: 3px solid white;
+    border-radius: 20px;
+}
+
+#login-button:hover {
+    background-color: #020640;
+    color: white;
+}
+
+.login-section-footer {
+    text-align: center;
+    font-weight: bold;
+    color: white;
+}
+
+.login-section-footer a {
+    font-style: italic;
+    color: #80ccff;
+}
+
+.row{
+    box-shadow: 0 0 150px rgba(6, 12, 64, 1);
+}
