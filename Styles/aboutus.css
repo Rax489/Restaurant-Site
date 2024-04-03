@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
 
+main{
+    font-family: "Roboto Condensed";
+}
 .navbar {
     display: flex;
     justify-content: center;
@@ -83,3 +86,50 @@ footer {
     background-color: #041280;
     font-family: "Roboto Condensed";
 }
+.smaller-image {
+    max-height: 80%;
+    width: 100%;
+    box-shadow: 0 0 50px rgba(6, 12, 64, 1);
+}
+
+#text h2{
+    display: inline-block;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid #041280;
+}
+#text{
+    padding-right: 35px;
+}
+
+
+.carousel-inner {
+    position: relative;
+    margin-bottom: 50px;
+    overflow: hidden;
+    width: 100%;
+    height: 400px; /* Adjust height as needed */
+}
+
+.carousel-item {
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel-item img {
+    max-width: 1500px;
+    max-height: 500px;
+    width: auto;
+    height: 100vh;
+    margin: auto;
+    display: block;
+}
+
+
+.carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        filter: invert(1);
+        background-color: #00000080;
+        border-radius: 10px;
+    }
