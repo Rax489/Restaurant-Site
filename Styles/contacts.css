@@ -73,6 +73,16 @@
     border-color: #041280;
 }
 
+main {
+    font-family: "Roboto Condensed";
+    text-align: center;
+}
+
+main h1 {
+    border-bottom: 4px solid #041280;
+    margin-bottom: 40px;
+}
+
 .footer-content i {
     color: white;
 }
@@ -84,4 +94,69 @@
 footer {
     background-color: #041280;
     font-family: "Roboto Condensed";
+}
+
+.contacts-container {
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4);
+    height: 85vh;
+}
+
+.contacts-left h5 {
+    margin-bottom: 3%;
+    color: #041280;
+}
+
+.form-control {
+    position: relative !important;
+    margin: 1%;
+    border-radius: 0 !important;
+    border: 2px solid #041280 !important;
+}
+
+.form-control::placeholder {
+    position: absolute;
+    top: 1;
+    left: 1;
+}
+
+.contacts-left {
+    height: 100%;
+}
+
+.contacts-left form {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    height: 100%;
+}
+
+#question {
+    height: 20vh;
+}
+
+#map {
+    height: 30vh;
+    width: 75vh;
+}
+
+#send-button {
+    background-color: #041280;
+    color: white;
+    border-radius: 0;
+    width: 93.5vh;
+}
+
+#send-button:hover {
+    background-color: white;
+    color: #041280;
+    border-color: #041280;
+}
+
+.info-container h5 {
+    color: #041280;
+}
+
+.info-container p {
+    margin: 0;
 }
