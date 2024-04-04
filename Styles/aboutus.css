@@ -61,6 +61,7 @@ header {
     top: 50%;
     right: 10px;
     transform: translateY(-50%);
+    font-family: "Roboto Condensed";
 }
 
 #register {
@@ -71,6 +72,7 @@ header {
     top: 50%;
     right: 75px;
     transform: translateY(-50%);
+    font-family: "Roboto Condensed";
 }
 
 #login:hover,
