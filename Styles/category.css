@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
+main{
+    font-family: "Roboto Condensed";
+}
+.navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 11.5vh;
+}
+
+.nav-item {
+    font-family: "Roboto Condensed";
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.navbar-nav {
+    height: 100%;
+}
+
+.nav-item a {
+    color: black;
+}
+
+.nav-item a:hover {
+    color: white;
+    background-color: #041280;
+}
+
+#logo {
+    height: 18vh;
+    margin-top: 43px;
+    padding: 0;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3), 0px 0px 5px rgba(0, 0, 0, 0.1);
+    margin-right: 10px;
+}
+
+#banner-image {
+    width: 100%;
+    height: auto;
+    border-bottom: 3px solid black;
+    border-top: 3px solid black;
+}
+#manage{
+    background-color: #041280;
+    color: white;
+    border-radius: 0;
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    font-family: "Roboto Condensed";
+}
+
+#login {
+    background-color: #041280;
+    color: white;
+    border-radius: 0;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    font-family: "Roboto Condensed";
+}
+
+#register {
+    background-color: #041280;
+    color: white;
+    border-radius: 0;
+    position: absolute;
+    top: 50%;
+    right: 75px;
+    transform: translateY(-50%);
+    font-family: "Roboto Condensed";
+}
+
+#login:hover,
+#register:hover,
+#manage:hover {
+    background-color: white;
+    color: #041280;
+    border-color: #041280;
+}
+
+.category-title{
+    text-align: center;
+}
+.category-title h1{
+    display: inline-block;
+    border-bottom: 4px solid #041280;
+    padding: 0;
+    margin-bottom: 60px;
+}
+
+.list-group-item {
+    border: none !important;
+}
+.list-group-item img,
+.list-group-item .card-title,
+.list-group-item .card-text,
+.list-group-item .card-text {
+    border: none !important; 
+}
+
+.single-dish{
+    border-radius: 0%;
+    border: 3px solid #041280;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+}
+.footer-content i {
+    color: white;
+}
+
+.footer-content {
+    border-top: 3px solid black;
+}
+
+footer {
+    background-color: #041280;
+    font-family: "Roboto Condensed";
+}

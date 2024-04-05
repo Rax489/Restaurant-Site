@@ -1,9 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
 
 main {
+    margin-top: 5%;
     border-top: 6px solid #041280;
+    font-family: "Roboto Condensed";
     padding: 15px;
     background-color: #F5F5F5;
+}
+
+.admin-title{
+    text-align: center;
+}
+.admin-title h1{
+    display: inline-block;
+    border-bottom: 4px solid #041280;
+    padding: 0;
+    margin-bottom: 60px;
+}
+button{
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 header {
@@ -93,10 +108,7 @@ footer {
 }
 
 
-#service-manage h1,
-#gallery-manage h1, #worker-manage h1,
-#category-manage h1, #dish-manage h1,
-#feedback-manage h1{
+main h1{
     padding-bottom: 25px;
     border-bottom: 3px solid #041280;
 }
@@ -125,6 +137,7 @@ footer {
 }
 
 label{
+    font-size: 18px;
     font-weight: bold;
     font-style: italic;
 }
@@ -145,9 +158,20 @@ label{
     border: 1px solid #041280;
 }
 
+.list-group-item .button-container .delete-btn{
+    background-color: red;
+}
+
+.list-group-item .button-container .delete-btn:hover{
+    background-color: red;
+    color: black;
+    border: none;    
+}
+
 .delete-btn button{
     background-color: red;
 }
+
 
 .delete-btn button:hover{
     background-color: red;
@@ -177,7 +201,7 @@ label{
 
 .current-image{
     overflow: hidden;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Add shadow effect */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
 .current-image img {
