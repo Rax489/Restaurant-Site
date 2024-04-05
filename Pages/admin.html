@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../Styles/admin.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="icon" type="image/x-icon" href="../Images/logo.ico">
+    <title>Marine Waves</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm py-0 justify-content-center">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="main.html">НАЧАЛО</a></li>
+                    <li class="nav-item"><a class="nav-link" href="aboutus.html">ЗА НАС</a></li>
+                    <li class="nav-item"><a class="nav-link" href="services.html">УСЛУГИ</a></li>
+                </ul>
+                <img src="../Images/logo.jpg" alt="logoImage" id="logo" class="img-fluid">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="menu.html">МЕНЮ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="team.html">ЕКИП</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contacts.html">КОНТАКТИ</a></li>
+                </ul>
+                <a href="login.html" class="btn" id="login">ВЛЕЗ</a>
+                <a href="register.html" class="btn" id="register">РЕГИСТРИРАЙ СЕ</a>
+        </nav>
+    </header>
+    <main>
+        <section class="container-fluid" id="service-manage">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1 class="text-center">УСЛУГИ</h1>
+
+                    <div class="service-list button-container">
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">ОРГАНИЗИРАНЕ НА БАНКЕТИ<button class="btn btn-primary">Разгледай</button></li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">ПРОВЕЖДАНЕ НА СВАТБИ<button class="btn btn-primary">Разгледай</button></li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">ДЕТСКИ РОЖДЕННИ ДНИ<button class="btn btn-primary">Разгледай</button></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <form id="service-from">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="mb-3">
+                                    <label for="serviceName" class="form-label">Име на услугата</label>
+                                    <input type="text" class="form-control" id="serviceName" placeholder="Въведете име на услугата!">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="serviceDescription" class="form-label">Описание на услугата</label>
+                                    <textarea class="form-control" id="serviceDescription" rows="3" placeholder="Въведете описание на услугата"></textarea>
+                                </div>
+                            </div>
+                
+                            <div class="col-md-4">
+                                <div class="current-image">
+                                    <img src="../Images/services1.png" alt="Current Image" class="img-fluid">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="serviceImage" class="form-label">Снимка на услугата</label>
+                            <input class="form-control" type="file" id="serviceImage">
+                        </div>
+                
+                        
+                        <div class="button-container">
+                            <div class="row">
+                                <div class="col text-center add-btn">
+                                    <button class="btn" id="service-add">Добави</button>
+                                </div>
+                                <div class="col text-center edit-btn">
+                                    <button class="btn" id="service-edit">Редактирай</button>
+                                </div>
+                                <div class="col text-center delete-btn">
+                                    <button class="btn" id="service-delete">Изтрий</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                
+            </div>
+        </section>
+
+        <section class="container-fluid" id="gallery-manage">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1 class="text-center">ГАЛЕРИЯ</h1>
+                    <div class="gallery-list button-container">
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">Изображение 1<button class="btn btn-primary">Разгледай</button></li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">Изображение 2<button class="btn btn-primary">Разгледай</button></li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">Изображение 3<button class="btn btn-primary">Разгледай</button></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="current-image">
+                                <img src="../Images/galleryAdmin.png" alt="Current Image">
+                            </div>
+                        </div>
+                    
+                        <div class="col-md-6">
+                        <form>
+                            <div class="mb-3">
+                                <label for="imageName" class="form-label">Име на изображението</label>
+                                <input type="text" class="form-control" id="imageName" placeholder="Въведете име на изображението">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="newImage" class="form-label">Качване на ново изображение</label>
+                                <input class="form-control" type="file" id="newImage">
+                            </div>
+                                
+                            <div class="button-container">
+                                <div class="row">
+                                    <div class="col text-center add-btn">
+                                        <button class="btn" id="service-add">Добави</button>
+                                    </div>
+                                    <div class="col text-center edit-btn">
+                                        <button class="btn" id="service-edit">Редактирай</button>
+                                    </div>
+                                    <div class="col text-center delete-btn">
+                                        <button class="btn" id="service-delete">Изтрий</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container-fluid" id="worker-manage">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1 class="text-center">Работници</h1>
+                    <div class="worker-list button-container">
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">Работник 1<button class="btn btn-primary">Разгледай</button></li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">Работник 2<button class="btn btn-primary">Разгледай</button></li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">Работник 3<button class="btn btn-primary">Разгледай</button></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <form id="worker-form">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="workerName" class="form-label">Име</label>
+                                    <input type="text" class="form-control" id="workerName" placeholder="Въведете име на работника">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="workerPosition" class="form-label">Длъжност</label>
+                                    <select class="form-select" id="workerPosition">
+                                        <option value="" selected>Изберете длъжност</option>
+                                        <option value="chef">Главен готвач</option>
+                                        <option value="waiter">Сервитьор</option>
+                                        <option value="manager">Мениджър</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="workerExperience" class="form-label">Професионален опит</label>
+                                    <textarea class="form-control" id="workerExperience" rows="3" placeholder="Въведете професионален опит"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="workerImage" class="form-label">Снимка</label>
+                                    <input class="form-control" type="file" id="workerImage">
+                                </div>
+                            </div>
+                            <div class="col-md-6 d-flex justify-content-center align-items-center">
+                                <div class="current-image rounded-circle overflow-hidden">
+                                    <img src="../Images/cook1.png" class="img-fluid" alt="Worker Image">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="button-container">
+                            <div class="row">
+                                <div class="col text-center add-btn">
+                                    <button class="btn" id="worker-add">Добави</button>
+                                </div>
+                                <div class="col text-center edit-btn">
+                                    <button class="btn" id="worker-edit">Редактирай</button>
+                                </div>
+                                <div class="col text-center delete-btn">
+                                    <button class="btn" id="worker-delete">Изтрий</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section class="container-fluid" id="category-manage">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1 class="text-center">Категории</h1>
+                    <div class="gallery-list button-container">
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">Салати<button class="btn btn-primary">Разгледай</button></li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">Предястия<button class="btn btn-primary">Разгледай</button></li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">Основни<button class="btn btn-primary">Разгледай</button></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <form id="category-form">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="categoryName" class="form-label">Име</label>
+                                    <input type="text" class="form-control" id="categoryName" placeholder="Въведете име на категорията">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="categoryDescription" class="form-label">Описание</label>
+                                    <textarea class="form-control" id="categoryDescription" rows="3" placeholder="Въведете описание на категорията"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="categoryImage" class="form-label">Снимка</label>
+                                    <input class="form-control" type="file" id="categoryImage">
+                                </div>
+                            </div>
+                            <div class="col-md-6 d-flex justify-content-center align-items-center">
+                                <div class="current-image rounded overflow-hidden">
+                                    <img src="../Images/desserts.png" class="img-fluid" alt="Category Image">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="button-container">
+                            <div class="row">
+                                <div class="col text-center add-btn">
+                                    <button class="btn" id="category-add">Добави</button>
+                                </div>
+                                <div class="col text-center edit-btn">
+                                    <button class="btn" id="category-edit">Редактирай</button>
+                                </div>
+                                <div class="col text-center delete-btn">
+                                    <button class="btn" id="category-delete">Изтрий</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+        
+        <section class="container-fluid" id="dish-manage">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1 class="text-center">Ястия</h1>
+                    <div class="category-dropdown mb-3">
+                        <label for="categorySelect" class="form-label">Изберете категория</label>
+                        <select class="form-select" id="categorySelect">
+                            <option value="" selected>Изберете категория</option>
+                            <option value="category1">Категория 1</option>
+                            <option value="category2">Категория 2</option>
+                            <option value="category3">Категория 3</option>
+                        </select>
+                    </div>
+                    <div class="dish-list button-container">
+                        <h2 class="text-center">Ястия от избраната категория</h2>
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">Ястие 1<button class="btn btn-primary">Разгледай</button></li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">Ястие 2<button class="btn btn-primary">Разгледай</button></li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">Ястие 3<button class="btn btn-primary">Разгледай</button></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <form id="dish-form">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="dishName" class="form-label">Име</label>
+                                    <input type="text" class="form-control" id="dishName" placeholder="Въведете име на ястието">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="dishPrice" class="form-label">Цена</label>
+                                    <input type="text" class="form-control" id="dishPrice" placeholder="Въведете цена на ястието">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="current-image mb-3 rounded overflow-hidden">
+                                    <img src="../Images/salad.png" class="img-fluid" alt="Dish Image">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="dishCategory" class="form-label">Категория</label>
+                                <select class="form-select" id="dishCategory">
+                                    <option value="" selected>Изберете категория</option>
+                                    <option value="category1">Категория 1</option>
+                                    <option value="category2">Категория 2</option>
+                                    <option value="category3">Категория 3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="dishDescription" class="form-label">Описание</label>
+                            <textarea class="form-control" id="dishDescription" rows="3" placeholder="Въведете описание на ястието"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="dishImage" class="form-label">Снимка</label>
+                            <input class="form-control" type="file" id="dishImage">
+                        </div>
+                        <div class="button-container">
+                            <div class="row">
+                                <div class="col text-center add-btn">
+                                    <button class="btn" id="dish-add">Добави</button>
+                                </div>
+                                <div class="col text-center edit-btn">
+                                    <button class="btn" id="dish-edit">Редактирай</button>
+                                </div>
+                                <div class="col text-center delete-btn">
+                                    <button class="btn" id="dish-delete">Изтрий</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section class="container-fluid" id="feedback-manage">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="text-center">Управление на обратна връзка</h1>
+                    
+                    <div class="feedback-list">
+                        <ul>
+                            <li class="feedback-item">
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <div class="feedback-content">
+                                            <p><strong>Име:</strong> John Doe</p>
+                                            <p><strong>Email:</strong> johndoe@example.com</p>
+                                            <p><strong>Отзив:</strong> Начи Сайта е много див</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="button-container">
+                                            <div class="col text-center add-btn">
+                                                <button class="btn" id="dish-add">Одобри</button>
+                                            </div>
+                                            <div class="col text-center delete-btn">
+                                                <button class="btn" id="dish-delete">Изтрий</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+        
+    </main>
+    
+    <footer class="mt-auto">
+        <div class="footer-content text-center text-white p-2 shadow-lg">
+            <p>© 2024 Marine Waves. Всички права запазени.</p>
+            <p>Бул. "България" №124 | +359 899 999 999 | marinewaves@gmail.com</p>
+            <p>Свържете се с нас: 
+                <a href="https://www.facebook.com" target="_blank"><i class="bi bi-facebook h3 m-1"></i></a> 
+                <a href="https://twitter.com" target="_blank"><i class="bi bi-twitter h3 m-1"></i></a> 
+                <a href="https://instagram.com" target="_blank"><i class="bi bi-instagram h3 m-1"></i></a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,5 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
 
+.main {
+    padding: 15px;
+}
+
+header {
+    margin-bottom: 50px;
+}
+
+section{
+    margin-bottom: 70px;
+}
 .navbar {
     display: flex;
     justify-content: center;
@@ -37,23 +48,6 @@
     margin-right: 10px;
 }
 
-#banner-image {
-    width: 100%;
-    height: auto;
-    border-bottom: 3px solid black;
-    border-top: 3px solid black;
-}
-#manage{
-    background-color: #041280;
-    color: white;
-    border-radius: 0;
-    position: absolute;
-    top: 50%;
-    left: 10px;
-    transform: translateY(-50%);
-    font-family: "Roboto Condensed";
-}
-
 #login {
     background-color: #041280;
     color: white;
@@ -77,8 +71,7 @@
 }
 
 #login:hover,
-#register:hover,
-#manage:hover {
+#register:hover {
     background-color: white;
     color: #041280;
     border-color: #041280;
@@ -97,48 +90,101 @@ footer {
     font-family: "Roboto Condensed";
 }
 
-.reservation-form-container {
-    position: absolute;
-    top: 50%;
-    left: 14%;
-    transform: translate(-50%, -50%);
-    z-index: 99;
+#service-manage,
+#gallery-manage, #worker-manage,
+#category-manage, #dish-manage,
+#feedback-manage{
+    padding: 30px;
 }
 
-.reservation-form {
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 20px;
+#service-manage h1,
+#gallery-manage h1, #worker-manage h1,
+#category-manage h1, #dish-manage h1,
+#feedback-manage h1{
+    padding-bottom: 25px;
+    border-bottom: 3px solid #041280;
+}
+
+.service-list,
+.gallery-list,
+.worker-list,
+.category-list{
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    border: 1px solid black;
 }
 
-.reservation-form input,
-.reservation-form button {
-    margin-bottom: 10px;
-    width: 100%;
+.single-service,
+.single-gallery,
+.single-worker,
+.single-category{
+    padding: 10px 25px;
 }
 
-.reservation-form label {
-    font-family: "Roboto Condensed";
+.single-service p,
+.single-gallery p,
+.single-worker p,
+.single-category p{
+    font-weight: bold; 
+    padding: 10px;
+    margin-bottom: 0;
+}
+
+label{
+    font-weight: bold;
     font-style: italic;
 }
 
-h3 {
-    font-family: "Roboto Condensed";
-    text-align: center;
-}
-
-#reservation-button {
+.button-container button{
+    margin-bottom: 5px;
     background-color: #041280;
     color: white;
     border: none;
     font-size: 18px;
     font-family: "Roboto Condensed";
-    height: 8vh;
+    height: 6vh;
 }
 
-#reservation-button:hover {
+.button-container button:hover{
     background-color: white;
     color: #041280;
     border: 1px solid #041280;
+}
+
+.delete-btn button{
+    background-color: red;
+}
+
+.delete-btn button:hover{
+    background-color: red;
+    color: black;
+    border: none;
+}
+
+.add-btn button{
+    background-color: green;
+}
+
+.add-btn button:hover{
+    background-color: green;
+    color: black;
+    border: none;
+}
+
+.edit-btn button{
+    background-color: gray;
+}
+
+.edit-btn button:hover{
+    background-color: gray;
+    color: black;
+    border: none;
+}
+
+.current-image{
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Add shadow effect */
+}
+
+.current-image img {
+    max-width: 100%;
+    height: auto;
 }
