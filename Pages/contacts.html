@@ -33,22 +33,22 @@
     <main>
         <h1 class="mt-5 d-inline-block">КОНТАКТИ</h1>
         <section class="contacts-section m-3 p-3 mb-5">
-            <div class="contacts-container m-0 p-5">
+            <div class="contacts-container d-flex flex-column justify-content-center align-items-center m-0 p-5">
                 <div class="row">
                     <div class="contacts-left col-md-6">
+                        <h2>ПОДАВАНЕ НА ЗАПИТВАНЕ</h2>
                         <h5>СВЪРЖЕТЕ С НАС: +359 898 234 859</h5>
-                        <h2 class="mb-3">ПОДАВАНЕ НА ЗАПИТВАНЕ</h2>
-                        <form>
+                        <form class="d-flex flex-column justify-content-center align-items-center">
                             <input type="text" class="form-control line-input" id="name" placeholder="Вашите имена *" required>
                             <input type="email" class="form-control line-input" id="email" placeholder="Вашият имейл *" required>
                             <input type="text" class="form-control line-input" id="number" placeholder="Вашият телефон *" required>
-                            <input type="text" class="form-control line-input" id="question" placeholder="Вашето запитване *" required>
-                            <button type="submit" class="btn btn-block mt-3" id="send-button">ИЗПРАТИ</button>
+                            <input type="long-text" class="form-control line-input mb-5" id="question" placeholder="Вашето запитване *" required>
+                            <button type="submit" class="btn btn-block mt-5" id="send-button">ИЗПРАТИ</button>
                         </form>
                     </div>
                     <div class="contacts-right col-md-6 d-flex flex-column justify-content-center align-items-center">
                         <h3>КЪДЕ СЕ НАМИРАМЕ?</h3>
-                        <div id="map" class="mt-5"></div>
+                        <div id="map" class="mt-5" onload="initMap()"></div>
                         <div class="info-container mt-4">
                             <h5 class="mb-3">ИНФОРМАЦИЯ ЗА КОНТАКТ</h5>
                             <p><b>Адрес:</b> Варна, бул. Приморски 25</p>
@@ -71,7 +71,6 @@
             </p>
         </div>
     </footer>
-
     <script>
     function initMap() {
         var mapOptions = {
