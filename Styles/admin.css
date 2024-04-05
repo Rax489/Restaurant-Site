@@ -1,7 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
 
-.main {
+main {
+    border-top: 6px solid #041280;
     padding: 15px;
+    background-color: #F5F5F5;
 }
 
 header {
@@ -90,12 +92,6 @@ footer {
     font-family: "Roboto Condensed";
 }
 
-#service-manage,
-#gallery-manage, #worker-manage,
-#category-manage, #dish-manage,
-#feedback-manage{
-    padding: 30px;
-}
 
 #service-manage h1,
 #gallery-manage h1, #worker-manage h1,
