@@ -1,5 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
 
+main {
+    font-family: "Roboto Condensed";
+    text-align: center;
+}
+
+main h1 {
+    display: inline-block;
+    border-bottom: 3px solid #041280;
+}
+
 .navbar {
     display: flex;
     justify-content: center;
@@ -141,4 +151,164 @@ h3 {
     background-color: white;
     color: #041280;
     border: 1px solid #041280;
+}
+
+.title-container{
+    display: flex;
+    justify-content: center;
+}
+
+.latest-news-container {
+    border: 3px solid #041280;
+    border-right: none;
+    height: 70vh;
+    padding: 5px;
+    padding-right: 0;
+}
+
+.latest-news-right {
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+.latest-news-right img {
+    width: 100%;
+    height: 85vh;
+    object-fit: cover;
+}
+
+.latest-news-left p {
+    font-size: 120%;
+}
+
+.list-group-item {
+    border: none !important;
+}
+
+.list-group-item img,
+.list-group-item .card-title,
+.list-group-item .card-text,
+.list-group-item .card-text {
+    border: none !important; 
+}
+
+.list-group-item .img-thumbnail {
+    border: 4px solid #041280 !important;
+    border-radius: 0;
+    padding: 0;
+}
+
+.single-dish {
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1), 0px 10px 30px rgba(0, 0, 0, 0.2);
+    padding: 3%;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.single-dish:hover {
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3), 0px 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+.single-dish .list-group-item:last-child .card-text {
+    color: #041280;
+    display: inline-block;
+    font-weight: bold;
+    border: 2px solid #041280 !important;
+    padding: 1%;
+    padding-left: 2%;
+    padding-right: 2%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-title {
+    background-color: #041280;
+    color: white !important;
+    padding: 3%;
+    font-weight: bold;
+}
+
+.textup { 
+	text-align: center; 
+	color: #041280; 
+	font-weight: 700; 
+} 
+
+.section-review-post i { 
+	margin-right: 3px; 
+} 
+
+.section-review-post .form-box { 
+	background-color: #fff; 
+	box-shadow: 0 0 10px rgba(36, 67, 40, 0.8); 
+	padding: 15px; 
+	border-radius: 0; 
+	width: 60%;
+    margin: 0 auto;
+}
+
+.star-rating {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+  
+  .star-rating input[type="radio"] {
+    display: none;
+  }
+  
+  .star-rating label {
+    font-size: 27px !important;
+    padding: 5px;
+    cursor: pointer;
+  }
+  
+  .star-rating label:before {
+    content: '\2605';
+  }
+  
+  .star-rating input[type="radio"]:checked ~ label:before {
+    color: gold;
+  }  
+
+.section-review-post label { 
+	display: block; 
+	margin-bottom: 8px; 
+	font-size: 17px; 
+	color: #041280; 
+	font-weight: 600; 
+}
+.star-rating .rating-text {
+    margin-bottom: 8px; 
+	font-size: 17px; 
+	color: #041280; 
+	font-weight: 600; 
+}
+
+.section-review-post input, 
+.section-review-post textarea { 
+	width: 100%; 
+	padding: 8px; 
+	margin-bottom: 12px; 
+	box-sizing: border-box; 
+	border-radius: 0;
+    border: 2px solid #041280;
+} 
+
+.section-review-post button { 
+	background-color: #041280; 
+	color: white; 
+	padding: 10px; 
+	border: 3px solid #041280; 
+	border-radius: 0; 
+	cursor: pointer; 
+	width: 100%; 
+	transition: .2s linear; 
+    font-weight: bold;
+} 
+
+.section-review-post button:hover { 
+	background-color: white; 
+	border: 3px solid #041280;
+    color: #041280; 
+	transform: translateY(-3px); 
 }
