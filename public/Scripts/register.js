@@ -6,15 +6,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Collect form data
         const formData = {
-            names: document.getElementById('names').value,
+            id: 1,
             email: document.getElementById('email').value,
-            password: document.getElementById('password').value,
-            passwordConfirm: document.getElementById('password-confirm').value
+            name: document.getElementById('names').value,
+            password: document.getElementById('password').value
         };
 
         // Send data to server
         try {
-            const response = await fetch('/api/users', {
+            const response = await fetch('http://localhost:3001/api/users', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
