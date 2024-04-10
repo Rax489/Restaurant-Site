@@ -1,22 +1,41 @@
-import {userService} from '../../db_operations/userService';
-const form = document.querySelector('form');
+document.addEventListener('DOMContentLoaded', function() {
+    const registerForm = document.getElementById('register-form');
 
-form.addEventListener('submit', function(event) {
-    event.preventDefault();
-    var passwordValue = document.getElementById("password").value;
-    var passwordConfirmValue = document.getElementById("password-confirm").value;
+    registerForm.addEventListener('submit', async function(event) {
+        event.preventDefault();
 
-    if (passwordValue !== passwordConfirmValue) {
-        document.getElementById("result-register").innerHTML = "Паролите Ви не съвпадат!";
-        document.getElementById("password").value = "";
-        document.getElementById("password-confirm").value = "";
-        return false;
-    }
-    else {
-        window.location.href = "index.html";
-        return true;
-    }
+        // Collect form data
+        const formData = {
+            names: document.getElementById('names').value,
+            email: document.getElementById('email').value,
+            password: document.getElementById('password').value,
+            passwordConfirm: document.getElementById('password-confirm').value
+        };
+
+        // Send data to server
+        try {
+            const response = await fetch('/api/users', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to register user');
+            }
+
+            const data = await response.json();
+            console.log('User registered successfully:', data);
+        } catch (error) {
+            console.error('Error registering user:', error);
+            const resultRegister = document.getElementById('result-register');
+            resultRegister.textContent = 'Failed to register user. Please try again later.';
+        }
+    });
 });
+
 
 const inputs = document.querySelectorAll('.line-input');
 
