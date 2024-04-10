@@ -1,3 +1,9 @@
+
+
+
+
+
+
 const inputs = document.querySelectorAll('.line-input');
 
 inputs.forEach(input => {
