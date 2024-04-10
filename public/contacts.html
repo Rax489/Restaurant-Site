@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../Styles/contacts.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmmfQmDb60Z68fhqsyYKxRUzHs29W-UJQ&callback=initMap" async defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="icon" type="image/x-icon" href="../Images/logo.ico">
+    <title>Контакти</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm py-0 justify-content-center">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="index.html">НАЧАЛО</a></li>
+                    <li class="nav-item"><a class="nav-link" href="aboutus.html">ЗА НАС</a></li>
+                    <li class="nav-item"><a class="nav-link" href="services.html">УСЛУГИ</a></li>
+                </ul>
+                <img src="../Images/logo.jpg" alt="logoImage" id="logo" class="img-fluid">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="menu.html">МЕНЮ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="team.html">ЕКИП</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contacts.html">КОНТАКТИ</a></li>
+                </ul>
+                <a href="login.html" class="btn" id="login">ВЛЕЗ</a>
+                <a href="register.html" class="btn" id="register">РЕГИСТРИРАЙ СЕ</a>
+        </nav>
+        <img src="../Images/banner.png" alt="bannerImage" id="banner-image" class="img-fluid">
+    </header>
+    <main>
+        <h1 class="mt-5 d-inline-block">КОНТАКТИ</h1>
+        <section class="contacts-section m-3 p-3 mb-5">
+            <div class="contacts-container d-flex flex-column justify-content-center align-items-center m-0 p-5">
+                <div class="row col-md-12 p-0">
+                    <div class="contacts-left col-md-6 p-3">
+                        <h2>ПОДАВАНЕ НА ЗАПИТВАНЕ</h2>
+                        <h5>СВЪРЖЕТЕ С НАС: +359 898 234 859</h5>
+                        <form class="d-flex flex-column justify-content-center align-items-center">
+                            <input type="text" class="form-control line-input" id="name" placeholder="Вашите имена *" required>
+                            <input type="email" class="form-control line-input" id="email" placeholder="Вашият имейл *" required>
+                            <input type="text" class="form-control line-input" id="number" placeholder="Вашият телефон *" required>
+                            <input type="long-text" class="form-control line-input mb-5" id="question" placeholder="Вашето запитване *" required>
+                            <button type="submit" class="btn btn-block m-0" id="send-button">ИЗПРАТИ</button>
+                        </form>
+                    </div>
+                    <div class="contacts-right col-md-6 d-flex flex-column justify-content-center align-items-center p-3">
+                        <h3>КЪДЕ СЕ НАМИРАМЕ?</h3>
+                        <div id="map" class="mt-5" onload="initMap()"></div>
+                        <div class="info-container mt-4">
+                            <h5 class="mb-3">ИНФОРМАЦИЯ ЗА КОНТАКТ</h5>
+                            <p><b>Адрес:</b> Варна, бул. Приморски 25</p>
+                            <p><b>Телефон:</b> +359 898 234 859</p>
+                            <p><b>Имейл:</b> marinewavesrestaurant@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="mt-auto">
+        <div class="footer-content text-center text-white p-2 shadow-lg">
+            <p>© 2024 Marine Waves. Всички права запазени.</p>
+            <p>Бул. "България" №124 | +359 899 999 999 | marinewaves@gmail.com</p>
+            <p>Свържете се с нас: 
+                <a href="https://www.facebook.com" target="_blank"><i class="bi bi-facebook h3 m-1"></i></a> 
+                <a href="https://twitter.com" target="_blank"><i class="bi bi-twitter h3 m-1"></i></a> 
+                <a href="https://instagram.com" target="_blank"><i class="bi bi-instagram h3 m-1"></i></a>
+            </p>
+        </div>
+    </footer>
+    <script>
+    function initMap() {
+        var mapOptions = {
+            center: { lat: 43.20142586, lng: 27.9232657 },
+            zoom: 13
+        };
+
+        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+        new google.maps.Marker({
+            position: { lat: 43.20142586, lng: 27.9232657 },
+            map,
+            title: "Marine Waves Restaurant",
+        });
+    }
+    </script>
+</body>
+</html>
