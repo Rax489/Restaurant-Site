@@ -1,44 +1,60 @@
-const { createUser, getUsers, getUserById, updateUser, deleteUser } = require('../models/userModel');
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 
-async function createUserHandler(reqBody) {
+async function createUser(userData) {
     try {
-        const newUser = await createUser(reqBody);
+        const newUser = await prisma.user.create({
+            data: userData,
+        });
         return newUser;
     } catch (error) {
         throw new Error('Error creating user');
     }
 }
 
-async function getUsersHandler() {
+async function getUsers() {
     try {
-        const users = await getUsers();
+        const users = await prisma.user.findMany();
         return users;
     } catch (error) {
         throw new Error('Error getting users');
     }
 }
 
-async function getUserByIdHandler(userId) {
+async function getUserById(userId) {
     try {
-        const user = await getUserById(userId);
+        const user = await prisma.user.findUnique({
+            where: {
+                id: parseInt(userId),
+            },
+        });
         return user;
     } catch (error) {
         throw new Error('Error getting user by ID');
     }
 }
 
-async function updateUserHandler(userId, userData) {
+async function updateUser(userId, userData) {
     try {
-        const updatedUser = await updateUser(userId, userData);
+        const updatedUser = await prisma.user.update({
+            where: {
+                id: parseInt(userId),
+            },
+            data: userData,
+        });
         return updatedUser;
     } catch (error) {
         throw new Error('Error updating user');
     }
 }
 
-async function deleteUserHandler(userId) {
+async function deleteUser(userId) {
     try {
-        const deletedUser = await deleteUser(userId);
+        const deletedUser = await prisma.user.delete({
+            where: {
+                id: parseInt(userId),
+            },
+        });
         return deletedUser;
     } catch (error) {
         throw new Error('Error deleting user');
@@ -46,9 +62,9 @@ async function deleteUserHandler(userId) {
 }
 
 module.exports = {
-    createUser: createUserHandler,
-    getUsers: getUsersHandler,
-    getUserById: getUserByIdHandler,
-    updateUser: updateUserHandler,
-    deleteUser: deleteUserHandler
+    createUser,
+    getUsers,
+    getUserById,
+    updateUser,
+    deleteUser
 };
