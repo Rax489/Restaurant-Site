@@ -44,13 +44,23 @@
     border-top: 3px solid black;
 }
 
-#login {
+#login , #logout{
     background-color: #041280;
     color: white;
     border-radius: 0;
     position: absolute;
     top: 50%;
     right: 10px;
+    transform: translateY(-50%);
+    font-family: "Roboto Condensed";
+}
+
+#greetingMessage{
+    color: black;
+    border-radius: 0;
+    position: absolute;
+    top: 50%;
+    right: 120px;
     transform: translateY(-50%);
     font-family: "Roboto Condensed";
 }
@@ -67,7 +77,8 @@
 }
 
 #login:hover,
-#register:hover {
+#register:hover,
+#logout:hover {
     background-color: white;
     color: #041280;
     border-color: #041280;

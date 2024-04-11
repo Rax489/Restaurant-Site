@@ -21,11 +21,11 @@ document.addEventListener('DOMContentLoaded', function() {
                             name:user.name,
                             email:user.email
                         };
-                // Send POST request to create a new session
-                const sessionResponse = await fetch('http://localhost:3001/api/sessions', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
+
+                    const sessionResponse = await fetch('http://localhost:3001/api/sessions', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(loggedUser)
                 });

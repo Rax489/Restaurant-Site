@@ -11,6 +11,16 @@ router.post('/', async (req, res, next) => {
   }
 });
 
+router.post('/logout', async (req, res, next) => {
+  try {
+    const session = await sessionController.clearSessions();
+    res.status(201).json(session);
+  } catch (error) {
+    next(error);
+  }
+});
+
+
 router.get('/', async (req, res, next) => {
   try {
     const sessions = await sessionController.getSessions();

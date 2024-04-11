@@ -47,24 +47,24 @@ main{
     border-bottom: 3px solid black;
     border-top: 3px solid black;
 }
-#manage{
-    background-color: #041280;
-    color: white;
-    border-radius: 0;
-    position: absolute;
-    top: 50%;
-    left: 10px;
-    transform: translateY(-50%);
-    font-family: "Roboto Condensed";
-}
 
-#login {
+#login , #logout{
     background-color: #041280;
     color: white;
     border-radius: 0;
     position: absolute;
     top: 50%;
     right: 10px;
+    transform: translateY(-50%);
+    font-family: "Roboto Condensed";
+}
+
+#greetingMessage{
+    color: black;
+    border-radius: 0;
+    position: absolute;
+    top: 50%;
+    right: 120px;
     transform: translateY(-50%);
     font-family: "Roboto Condensed";
 }
@@ -82,7 +82,7 @@ main{
 
 #login:hover,
 #register:hover,
-#manage:hover {
+#logout:hover {
     background-color: white;
     color: #041280;
     border-color: #041280;

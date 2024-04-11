@@ -37,9 +37,20 @@ async function deleteSession(sessionId) {
   }
 }
 
+async function clearSessions() {
+  try {
+    console.log("clearing")
+    const deletedSessions = await prisma.session.deleteMany();
+    return deletedSessions;
+  } catch (error) {
+    throw new Error('Error clearing sessions');
+  }
+}
+
 module.exports = {
   createSession,
   getSessions,
   getSessionById,
-  deleteSession
+  deleteSession,
+  clearSessions
 };
