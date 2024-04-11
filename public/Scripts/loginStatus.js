@@ -15,9 +15,12 @@ async function checkLoginStatus() {
       const isLoggedIn = session && session.length > 0;
       if (isLoggedIn) {
         const userName = session[0].name;
-        updateUI(isLoggedIn, userName);
+        const userEmail = session[0].email;
+        
+        const isAdmin = userName === 'Admin' && userEmail === 'admin@admin.com';
+        updateUI(isLoggedIn, userName, isAdmin);
       } else {
-        updateUI(isLoggedIn);
+        updateUI(isLoggedIn); 
       }
     } catch (error) {
       console.error('Error checking login status:', error);
@@ -25,7 +28,8 @@ async function checkLoginStatus() {
   }
   
  
-function updateUI(isLoggedIn, userName) {
+function updateUI(isLoggedIn, userName,isAdmin) {
+    const manageButton = document.getElementById('manage')
     const loginButton = document.getElementById('login');
     const registerButton = document.getElementById('register');
     const greetingMessage = document.getElementById('greetingMessage');
@@ -34,10 +38,17 @@ function updateUI(isLoggedIn, userName) {
     if (isLoggedIn) {
       loginButton.style.display = 'none';
       registerButton.style.display = 'none';
-      greetingMessage.textContent = `Здравей, ${userName}!`;
+      greetingMessage.textContent = `Здравейте, ${userName}!`;
       greetingMessage.style.display = 'inline-block';
       logoutButton.style.display = 'inline-block';
-      logoutButton.textContent = "Излизане";
+      logoutButton.textContent = 'Излизане';
+        if (manageButton) {
+            if (isAdmin) {
+                manageButton.style.display = 'inline-block';
+            } else {
+                manageButton.style.display = 'none';
+            }
+        }
     } else {
       loginButton.style.display = 'inline-block';
       registerButton.style.display = 'inline-block';

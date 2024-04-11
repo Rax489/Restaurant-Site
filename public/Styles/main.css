@@ -54,6 +54,7 @@ main h1 {
     border-top: 3px solid black;
 }
 #manage{
+    display: none;
     background-color: #041280;
     color: white;
     border-radius: 0;

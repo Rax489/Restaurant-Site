@@ -39,7 +39,6 @@ async function deleteSession(sessionId) {
 
 async function clearSessions() {
   try {
-    console.log("clearing")
     const deletedSessions = await prisma.session.deleteMany();
     return deletedSessions;
   } catch (error) {
