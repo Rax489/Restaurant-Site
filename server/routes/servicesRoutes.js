@@ -59,9 +59,24 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', upload.single('srcImage') ,async (req, res, next) => {
   try {
-    const updatedService = await serviceController.updateService(req.params.id, req.body);
+    if (!req.file) {
+      throw new Error('No file uploaded');
+    }
+    const imageUrl = req.file.path; 
+
+    const { name, desc } = req.body;
+    
+    const newService = {
+      name,
+      desc,
+      imageUrl
+    };
+
+    console.log(newService)
+
+    const updatedService = serviceController.updateService(req.params.id, newService);
     res.json(updatedService);
   } catch (error) {
     next(error);
