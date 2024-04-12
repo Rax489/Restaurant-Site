@@ -11,7 +11,7 @@ datasource db {
 model Category {
   id      Int    @id @default(autoincrement())
   name    String @unique
-  desc    String @unique
+  desc    String 
   imageId Int?
   Dish    Dish[]
 }
@@ -21,9 +21,9 @@ model Dish {
   id       Int       @id @default(autoincrement())
   name     String    @unique
   category String?
-  price    Decimal   @unique @db.Decimal
-  desc     String    @unique
-  imageId  Int?
+  price    Decimal   @db.Decimal
+  desc     String    
+  imageUrl String?
   Category Category? @relation(fields: [category], references: [name], onDelete: NoAction, onUpdate: NoAction, map: "public_Dish_category_fkey")
 }
 
@@ -32,8 +32,8 @@ model Employee {
   id       Int       @id @default(autoincrement())
   name     String    @unique
   position String?
-  exp      String    @unique
-  imageId  Int?
+  exp      String    
+  imageUrl String?
   Position Position? @relation(fields: [position], references: [name], onDelete: NoAction, onUpdate: NoAction, map: "public_Employee_position_fkey")
 }
 
@@ -47,24 +47,16 @@ model Feedback {
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model Gallery {
-  id      Int    @id @default(autoincrement())
-  name    String @unique
-  imageId Int?
-}
-
-/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
-model Image {
-  id       Int    @id @default(autoincrement())
-  filename String @unique
-  mimetype String @unique
-  size     Int?
+  id       Int     @id @default(autoincrement())
+  name     String  @unique
+  imageUrl String?
 }
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model Position {
   id       Int        @id @default(autoincrement())
   name     String     @unique
-  desc     String     @unique
+  desc     String    
   Employee Employee[]
 }
 
@@ -72,7 +64,7 @@ model Position {
 model Service {
   id       Int     @id @default(autoincrement())
   name     String  @unique
-  desc     String  @unique
+  desc     String  
   imageUrl String?
 }
 
