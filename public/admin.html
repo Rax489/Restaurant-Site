@@ -40,54 +40,34 @@
                     <h1 class="text-center">УСЛУГИ</h1>
 
                     <div class="service-list button-container">
-                        <ul class="list-group">
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <div class="d-flex justify-content-between align-items-center w-100">
-                                    <span>ОРГАНИЗИРАНЕ НА БАНКЕТИ</span>
-                                    <div class="button-container">
-                                        <button class="btn me-2">Разгледай</button>
-                                        <button class="btn delete-btn">Изтрий</button>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <div class="d-flex justify-content-between align-items-center w-100">
-                                    <span>ПРОВЕЖДАНЕ НА СВАТБИ</span>
-                                    <div class="button-container">
-                                        <button class="btn me-2">Разгледай</button>
-                                        <button class="btn delete-btn">Изтрий</button>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
+                        <ul class="list-group"> </ul>
                     </div>
                     
                 </div>
                 <div class="col-md-6">
-                    <form id="service-from">
+                    <form id="service-from" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-md-8">
                                 <div class="mb-3">
                                     <label for="serviceName" class="form-label">Име на услугата</label>
-                                    <input type="text" class="form-control" id="serviceName" placeholder="Въведете име на услугата!">
+                                    <input type="text" class="form-control" id="serviceName" name="serviceName" placeholder="Въведете име на услугата!" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="serviceDescription" class="form-label">Описание на услугата</label>
-                                    <textarea class="form-control" id="serviceDescription" rows="3" placeholder="Въведете описание на услугата"></textarea>
+                                    <textarea class="form-control" id="serviceDescription"  name="serviceDescription" rows="3" placeholder="Въведете описание на услугата" required></textarea>
                                 </div>
                             </div>
                 
                             <div class="col-md-4">
                                 <div class="current-image mb-3">
-                                    <img src="../Images/services1.png" alt="Current Image" class="img-fluid">
+                                    <img src="../Images/services1.png" alt="Current Image" class="img-fluid" id="currentImage">
                                 </div>
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="serviceImage" class="form-label">Снимка на услугата</label>
-                            <input class="form-control" type="file" id="serviceImage">
+                            <input class="form-control" type="file" name = "srcImage" id="serviceImage" required>
                         </div>
-                
                         
                         <div class="button-container">
                             <div class="row">
@@ -101,7 +81,6 @@
                         </div>
                     </form>
                 </div>
-                
             </div>
         </section>
 
@@ -435,6 +414,7 @@
         </div>
     </footer>
 
+    <script src="./Scripts/admin.js"></script>
     <script src="./Scripts/loginStatus.js"></script>
 </body>
 </html>

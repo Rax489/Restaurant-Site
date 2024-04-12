@@ -70,10 +70,10 @@ model Position {
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model Service {
-  id      Int    @id @default(autoincrement())
-  name    String @unique
-  desc    String @unique
-  imageId Int?
+  id       Int     @id @default(autoincrement())
+  name     String  @unique
+  desc     String  @unique
+  imageUrl String?
 }
 
 model User {
