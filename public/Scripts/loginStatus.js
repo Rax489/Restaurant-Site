@@ -41,7 +41,7 @@ function updateUI(isLoggedIn, userName,isAdmin) {
       greetingMessage.textContent = `Здравейте, ${userName}!`;
       greetingMessage.style.display = 'inline-block';
       logoutButton.style.display = 'inline-block';
-      logoutButton.textContent = 'Излизане';
+      logoutButton.textContent = 'ИЗЛИЗАНЕ';
         if (manageButton) {
             if (isAdmin) {
                 manageButton.style.display = 'inline-block';
