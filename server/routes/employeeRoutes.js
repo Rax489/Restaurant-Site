@@ -2,13 +2,40 @@ const express = require('express');
 const router = express.Router();
 const employeeController = require('../controllers/employeeController');
 
-router.post('/', async (req, res, next) => {
-    try {
-        const newEmployee = await employeeController.createEmployee(req.body);
-        res.status(201).json(newEmployee);
-    } catch (error) {
-        next(error);
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/Images'); // Destination folder
+  },
+  filename: function (req, file, cb) {
+    cb(null,file.originalname); // File name
+  }
+});
+
+const upload = multer({ storage: storage });
+
+router.post('/', upload.single('srcImage'), async (req, res, next) => {
+  try {
+    if (!req.file) {
+      throw new Error('No file uploaded');
     }
+
+    const imageUrl = req.file.path; 
+
+    const { name, position, exp } = req.body;
+    
+    const newEmployee = await employeeController.createEmployee({
+      name,
+      position,
+      exp,
+      imageUrl
+    });
+
+    res.status(201).json(newEmployee);
+  } catch (error) {
+    next(error);
+  }
 });
 
 router.get('/', async (req, res, next) => {
@@ -33,14 +60,29 @@ router.get('/:id', async (req, res, next) => {
     }
 });
 
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', upload.single('srcImage') ,async (req, res, next) => {
     try {
-        const updatedEmployee = await employeeController.updateEmployee(req.params.id, req.body);
-        res.json(updatedEmployee);
+      if (!req.file) {
+        throw new Error('No file uploaded');
+      }
+      const imageUrl = req.file.path; 
+  
+      const { name, position, exp } = req.body;
+      
+      const newEmployee = {
+        name,
+        position,
+        exp,
+        imageUrl
+      };
+  
+  
+      const updatedEmployee = employeeController.updateEmployee(req.params.id, newEmployee);
+      res.json(updatedEmployee);
     } catch (error) {
-        next(error);
+      next(error);
     }
-});
+  });
 
 router.delete('/:id', async (req, res, next) => {
     try {

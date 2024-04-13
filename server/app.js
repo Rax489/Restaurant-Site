@@ -13,6 +13,7 @@ const servicesRoutes = require('./routes/servicesRoutes');
 const employeeRoutes = require('./routes/employeeRoutes');
 const galleryRoutes = require('./routes/galleryRoutes');
 const feedbackRoutes = require('./routes/feedbackRoutes');
+const positionRoutes = require('./routes/positionRoutes');
 
 app.use('/api/users', userRoutes);
 app.use('/api/sessions', sessionRoutes);
@@ -21,6 +22,7 @@ app.use('/api/services', servicesRoutes);
 app.use('/api/employees', employeeRoutes);
 app.use('/api/gallery', galleryRoutes);
 app.use('/api/feedback', feedbackRoutes);
+app.use('/api/positions', positionRoutes);
 
 app.use((err, req, res, next) => {
     console.error(err.stack);

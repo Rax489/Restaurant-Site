@@ -113,29 +113,32 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="current-image mb-3">
-                                <img src="../Images/galleryAdmin.png" alt="Current Image">
+                                <img src="../Images/galleryAdmin.png" alt="Current Image" id="currentImageGallery">
                             </div>
                         </div>
                     
                         <div class="col-md-6">
-                        <form>
+                        <form id="gallery-form" enctype="multipart/form-data">
                             <div class="mb-3">
                                 <label for="imageName" class="form-label">Име на изображението</label>
-                                <input type="text" class="form-control" id="imageName" placeholder="Въведете име на изображението">
+                                <input type="text" class="form-control" id="imageName" placeholder="Въведете име на изображението" required>
                             </div>
 
                             <div class="mb-3">
                                 <label for="newImage" class="form-label">Качване на ново изображение</label>
-                                <input class="form-control" type="file" id="newImage">
+                                <input class="form-control" type="file" name="srcImage" id="newImage" required>
+                                <input type="hidden" id="galleryImageId" name="galleryImageId">
                             </div>
                                 
+                            <p class="m-0 p-0 mt-4 mb-2 text-black" id="result-gallery"></p>
+
                             <div class="button-container">
                                 <div class="row">
                                     <div class="col text-center add-btn">
-                                        <button class="btn" id="service-add">ДОБАВИ</button>
+                                        <button class="btn" id="gallery-add">ДОБАВИ</button>
                                     </div>
                                     <div class="col text-center edit-btn">
-                                        <button class="btn" id="service-edit">РЕДАКТИРАЙ</button>
+                                        <button class="btn" id="gallery-edit">РЕДАКТИРАЙ</button>
                                     </div>
                                 </div>
                             </div>
@@ -172,7 +175,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <form id="worker-form">
+                    <form id="worker-form" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
@@ -183,9 +186,6 @@
                                     <label for="workerPosition" class="form-label">Длъжност</label>
                                     <select class="form-select" id="workerPosition">
                                         <option value="" selected>Изберете длъжност</option>
-                                        <option value="chef">Главен готвач</option>
-                                        <option value="waiter">Сервитьор</option>
-                                        <option value="manager">Мениджър</option>
                                     </select>
                                 </div>
                                 <div class="mb-3">
@@ -195,14 +195,17 @@
                             </div>
                             <div class="col-md-6 d-flex justify-content-center align-items-center">
                                 <div class="current-image rounded-circle overflow-hidden mb-3">
-                                    <img src="../Images/cook1.png" class="img-fluid" alt="Worker Image">
+                                    <img src="../Images/cook1.png" class="img-fluid" alt="Worker Image" id="currentImageEmployee">
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label for="workerImage" class="form-label">Снимка</label>
                                 <input class="form-control" type="file" id="workerImage">
+                                <input type="hidden" id="workerId" name="workerId">
                             </div>
-                        </div>
+                                
+                                <p class="m-0 p-0 mt-4 mb-2 text-black" id="result-employee"></p>
+                            </div>
                         <div class="button-container">
                             <div class="row">
                                 <div class="col text-center add-btn">
