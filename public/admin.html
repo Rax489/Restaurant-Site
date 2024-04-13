@@ -225,29 +225,14 @@
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <h1 class="text-center">КАТЕГОРИИ</h1>
-                    <div class="gallery-list button-container">
+                    <div class="category-list button-container">
                         <ul class="list-group">
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <span>Салати</span>
-                                <div class="button-container">
-                                    <button class="btn me-2">Разгледай</button>
-                                    <button class="btn delete-btn">Изтрий</button>
-                                </div>
-                            </li>
-                        
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <span>Основни</span>
-                                <div class="button-container">
-                                    <button class="btn me-2">Разгледай</button>
-                                    <button class="btn delete-btn">Изтрий</button>
-                                </div>
-                            </li>
-
+                            
                         </ul>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <form id="category-form">
+                    <form id="category-form" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <div class="mb-3">
@@ -261,14 +246,16 @@
                             </div>
                             <div class="col-md-6 d-flex justify-content-center align-items-center mb-3">
                                 <div class="current-image rounded overflow-hidden">
-                                    <img src="../Images/desserts.png" class="img-fluid" alt="Category Image">
+                                    <img src="../Images/desserts.png" class="img-fluid" alt="Category Image" id="currentCategoryImage">
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label for="categoryImage" class="form-label">Снимка</label>
                                 <input class="form-control" type="file" id="categoryImage">
+                                <input type="hidden" id="categoryId" name="categoryId">
                             </div>
                         </div>
+                        <p class="m-0 p-0 mt-4 mb-2 text-black" id="result-category"></p>
                         <div class="button-container">
                             <div class="row">
                                 <div class="col text-center add-btn">
@@ -292,35 +279,17 @@
                         <label for="categorySelect" class="form-label">Изберете категория</label>
                         <select class="form-select" id="categorySelect">
                             <option value="" selected>Изберете категория</option>
-                            <option value="category1">Категория 1</option>
-                            <option value="category2">Категория 2</option>
-                            <option value="category3">Категория 3</option>
                         </select>
                     </div>
                     <div class="dish-list button-container">
                         <h2 class="text-center">ЯСТИЯ ОТ ИЗБРАНА КАТЕГОРИЯ</h2>
                         <ul class="list-group">
                         
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <span>Ястия 1</span>
-                                <div class="button-container">
-                                    <button class="btn me-2">Разгледай</button>
-                                    <button class="btn delete-btn">Изтрий</button>
-                                </div>
-                            </li>
-                            
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <span>Ястия 2</span>
-                                <div class="button-container">
-                                    <button class="btn me-2">Разгледай</button>
-                                    <button class="btn delete-btn">Изтрий</button>
-                                </div>
-                            </li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <form id="dish-form">
+                    <form id="dish-form" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
@@ -354,7 +323,11 @@
                         <div class="mb-3">
                             <label for="dishImage" class="form-label">Снимка</label>
                             <input class="form-control" type="file" id="dishImage">
+                            <input type="hidden" id="dishId" name="dishId">
                         </div>
+
+                        <p class="m-0 p-0 mt-4 mb-2 text-black" id="result-dish"></p>
+
                         <div class="button-container">
                             <div class="row">
                                 <div class="col text-center add-btn">

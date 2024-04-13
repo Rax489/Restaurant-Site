@@ -3,7 +3,6 @@ const prisma = new PrismaClient();
 
 async function createEmployee(employeeData) {
     try {
-        console.log(JSON.stringify(employeeData))
         const newEmployee = await prisma.employee.create({
             data: employeeData,
         });

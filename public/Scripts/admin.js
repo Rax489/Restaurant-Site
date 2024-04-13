@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', async() => {
     await displayAllServices();
     await displayAllEmployees();
     await populatePositions();
+    await displayAllCategories();
+    await populateCategoryDropdown();
 });
 
 async function displayAllServices() {
@@ -80,7 +82,7 @@ document.getElementById('service-add').addEventListener('click', async (event) =
     const serviceImage = document.getElementById('serviceImage').files[0];
     
     if (!serviceName ||!serviceDescription || !serviceImage) {
-        document.getElementById('result-service').textContent = "Моля, попълнете име, описание и качете изображение.";
+        document.getElementById('result-service').textContent = "Моля попълнете всички полета!";
         return;
     }
 
@@ -105,6 +107,7 @@ document.getElementById('service-add').addEventListener('click', async (event) =
             throw new Error('Failed to add service');
         }
         document.getElementById('service-from').reset();
+        document.getElementById('result-service').textContent = "";
         displayAllServices();
     } catch (error) {
         console.error('Error adding service:', error);
@@ -145,8 +148,10 @@ document.getElementById('service-edit').addEventListener('click', async (event) 
             throw new Error('Failed to update service');
         }
 
-        displayAllServices();
+       
         document.getElementById('service-from').reset();
+        document.getElementById('result-service').textContent = "";
+        displayAllServices();
     } catch (error) {
         console.error('Error updating service:', error);
     }
@@ -213,7 +218,6 @@ async function displayAllGalleryImages() {
             });
 
             viewButton.addEventListener('click', () => {
-                console.log("previwing")
                 document.getElementById('imageName').value = image.name;
                 document.getElementById('galleryImageId').value = image.id;
                 const imageUrl = image.imageUrl.replace('public', '..');
@@ -262,6 +266,7 @@ document.getElementById('gallery-add').addEventListener('click', async (event) =
             throw new Error('Failed to add gallery image');
         }
         document.getElementById('gallery-form').reset();
+        document.getElementById('result-gallery').textContent = "";
         displayAllGalleryImages();
     } catch (error) {
         console.error('Error adding gallery image:', error);
@@ -299,13 +304,14 @@ document.getElementById('gallery-edit').addEventListener('click', async (event) 
             throw new Error('Failed to update gallery image');
         }
 
-        displayAllGalleryImages();
+        
         document.getElementById('gallery-form').reset();
+        document.getElementById('result-gallery').textContent = "";
+        displayAllGalleryImages();
     } catch (error) {
         console.error('Error updating gallery image:', error);
     }
 });
-
 
 async function checkGalleryImageExistence(imageName) {
     try {
@@ -393,19 +399,23 @@ async function displayAllEmployees() {
     }
 }
 
-
 document.getElementById('worker-add').addEventListener('click', async (event) => {
     event.preventDefault(); 
     
     const workerName = document.getElementById('workerName').value;
     const workerPositionElement = document.getElementById('workerPosition');
     const workerPosition = workerPositionElement.options[workerPositionElement.selectedIndex].textContent;
-
     const workerExperience = document.getElementById('workerExperience').value;
     const workerImage = document.getElementById('workerImage').files[0];
 
-    if (!workerName || !workerImage) {
-        alert('Please provide name and select an image.');
+    if(!workerName || !workerPosition || !workerExperience || !workerImage){
+        document.getElementById('result-employee').innerHTML = "Моля попълнете всички полета!";
+        return;
+    }
+    
+    const employeeExistence = await checkEmployeeExistence(workerName);
+    if(employeeExistence){
+        document.getElementById('result-employee').innerHTML = "Работник с това име вече съществува!";
         return;
     }
 
@@ -424,6 +434,7 @@ document.getElementById('worker-add').addEventListener('click', async (event) =>
             throw new Error('Failed to add employee');
         }
         document.getElementById('worker-form').reset();
+        document.getElementById('result-employee').innerHTML = "";
         displayAllEmployees();
     } catch (error) {
         console.error('Error adding employee:', error);
@@ -440,9 +451,14 @@ document.getElementById('worker-edit').addEventListener('click', async (event) =
     const workerExperience = document.getElementById('workerExperience').value;
     const workerImage = document.getElementById('workerImage').files[0];
 
-    if (!workerId || !workerName || !workerImage) {
-        alert('Please select an employee and provide name and image.');
+    if(!workerId){
+        document.getElementById('result-employee').innerHTML = "Моля изберете работник първо!";
         return;
+    }else{
+        if(!workerName || !workerPosition || !workerExperience || !workerImage){
+            document.getElementById('result-employee').innerHTML = "Моля попълнете всички полета!";
+            return;
+        }
     }
 
     const formData = new FormData();
@@ -460,11 +476,294 @@ document.getElementById('worker-edit').addEventListener('click', async (event) =
             throw new Error('Failed to update employee');
         }
         document.getElementById('worker-form').reset();
+        document.getElementById('result-employee').innerHTML = '';
         displayAllEmployees();
     } catch (error) {
         console.error('Error updating employee:', error);
     }
 });
+
+async function checkEmployeeExistence(employeeName) {
+    try {
+        const response = await fetch('http://localhost:3001/api/employees');
+        if (!response.ok) {
+            throw new Error('Failed to fetch employees');
+        }
+        const employees = await response.json();
+        const existingEmployee = employees.find(employee => employee.name === employeeName);
+        return !!existingEmployee;
+    } catch (error) {
+        console.error('Error:', error.message);
+        throw error;
+    }
+}
+
+async function displayAllCategories() {
+    try {
+        const response = await fetch('http://localhost:3001/api/categories');
+        if (!response.ok) {
+            throw new Error('Failed to fetch categories');
+        }
+
+        const categories = await response.json();
+
+        const categoryList = document.querySelector('.category-list ul');
+
+        categoryList.innerHTML = '';
+
+        categories.forEach(category => {
+            const listItem = document.createElement('li');
+            listItem.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center');
+
+            const itemContent = document.createElement('div');
+            itemContent.classList.add('d-flex', 'justify-content-between', 'align-items-center', 'w-100');
+
+            const categoryName = document.createElement('span');
+            categoryName.textContent = category.name;
+
+            const buttonContainer = document.createElement('div');
+            buttonContainer.classList.add('button-container');
+
+            const viewButton = document.createElement('button');
+            viewButton.classList.add('btn', 'me-2');
+            viewButton.textContent = 'Разгледай';
+
+            const deleteButton = document.createElement('button');
+            deleteButton.classList.add('btn', 'delete-btn');
+            deleteButton.textContent = 'Изтрий';
+
+            deleteButton.addEventListener('click', async () => {
+                try {
+                    const deleteResponse = await fetch(`http://localhost:3001/api/categories/${category.id}`, {
+                        method: 'DELETE'
+                    });
+                    if (!deleteResponse.ok) {
+                        throw new Error('Failed to delete category');
+                    }
+                    displayAllCategories();
+                } catch (error) {
+                    console.error('Error deleting category:', error);
+                }
+            });
+            viewButton.addEventListener('click', () => {
+                document.getElementById('categoryName').value = category.name;
+                document.getElementById('categoryDescription').value = category.desc;
+                const imageUrl = category.imageUrl.replace('public', '..');
+                document.getElementById('currentCategoryImage').src = imageUrl;
+                document.getElementById('categoryId').value = category.id;
+            });
+
+            itemContent.appendChild(categoryName);
+            itemContent.appendChild(buttonContainer);
+            buttonContainer.appendChild(viewButton);
+            buttonContainer.appendChild(deleteButton);
+            listItem.appendChild(itemContent);
+            categoryList.appendChild(listItem);
+        });
+    } catch (error) {
+        console.error('Error:', error.message);
+    }
+}
+
+document.getElementById('category-add').addEventListener('click', async (event) => {
+    event.preventDefault(); 
+    
+    const categoryName = document.getElementById('categoryName').value;
+    const categoryDescription = document.getElementById('categoryDescription').value;
+    const categoryImage = document.getElementById('categoryImage').files[0];
+    
+    if (!categoryName || !categoryDescription || !categoryImage) {
+        document.getElementById('result-category').textContent = "Моля попълнете всички полета!";
+        return;
+    }
+
+    const existingCategory = await checkCategoryExistence(categoryName);
+    if (existingCategory) {
+        document.getElementById('categoryName').value = "";
+        document.getElementById('result-category').textContent = "Категория с това име вече съществува! Моля, опитайте с друго име.";
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append('name', categoryName);
+    formData.append('desc', categoryDescription);
+    formData.append('srcImage', categoryImage);
+
+    try {
+        const response = await fetch('http://localhost:3001/api/categories', {
+            method: 'POST',
+            body: formData
+        });
+        if (!response.ok) {
+            throw new Error('Failed to add category');
+        }
+        document.getElementById('category-form').reset();
+        document.getElementById('result-category').textContent = "";
+        displayAllCategories();
+    } catch (error) {
+        console.error('Error adding category:', error);
+    }
+});
+
+document.getElementById('category-edit').addEventListener('click', async (event) => {
+    event.preventDefault();
+    
+    const categoryId = document.getElementById('categoryId').value;
+    const categoryName = document.getElementById('categoryName').value;
+    const categoryDescription = document.getElementById('categoryDescription').value;
+    const categoryImage = document.getElementById('categoryImage').files[0];
+
+    if (!categoryId) {
+        document.getElementById('result-category').textContent = "Моля първо изберете категория!";
+        return;
+    } else {
+        if (!categoryName || !categoryDescription || !categoryImage) {
+            document.getElementById('result-category').textContent = "Моля, попълнете име, описание и качете изображение.";
+            return;
+        }
+    }
+
+    const formData = new FormData();
+    formData.append('name', categoryName);
+    formData.append('desc', categoryDescription);
+    formData.append('srcImage', categoryImage);
+
+
+    try {
+        const response = await fetch(`http://localhost:3001/api/categories/${categoryId}`, {
+            method: 'PUT',
+            body: formData
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to update category');
+        }
+
+        document.getElementById('category-form').reset();
+        document.getElementById('result-category').textContent = "";
+        displayAllCategories();
+    } catch (error) {
+        console.error('Error updating category:', error);
+    }
+});
+
+async function checkCategoryExistence(categoryName) {
+    try {
+        const response = await fetch('http://localhost:3001/api/categories');
+        if (!response.ok) {
+            throw new Error('Failed to fetch categories');
+        }
+        const categories = await response.json();
+        const existingCategory = categories.find(category => category.name === categoryName);
+        return !!existingCategory;
+    } catch (error) {
+        console.error('Error:', error.message);
+        throw error;
+    }
+}
+
+document.getElementById('categorySelect').addEventListener('change', async () => {
+    const categoryElement = document.getElementById('categorySelect');
+    const categoryName = categoryElement.options[categoryElement.selectedIndex].textContent;
+
+    try {
+        const response = await fetch(`http://localhost:3001/api/dishes`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch dishes');
+        }
+
+        const dishes = await response.json();
+        const filteredDishes = dishes.filter(dish => dish.category === categoryName);
+        const dishList = document.querySelector('.dish-list ul');
+
+        dishList.innerHTML = '';
+
+        filteredDishes.forEach(dish => {
+            const listItem = document.createElement('li');
+            listItem.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center');
+
+            const dishNameSpan = document.createElement('span');
+            dishNameSpan.textContent = dish.name;
+        
+            const buttonContainer = document.createElement('div');
+            buttonContainer.classList.add('button-container');
+        
+            const viewButton = document.createElement('button');
+            viewButton.classList.add('btn', 'me-2');
+            viewButton.textContent = 'Разгледай';
+        
+            const deleteButton = document.createElement('button');
+            deleteButton.classList.add('btn', 'delete-btn');
+            deleteButton.textContent = 'Изтрий';
+        
+            viewButton.addEventListener('click', () => {
+                document.getElementById('dishName').value = dish.name;
+                document.getElementById('dishPrice').value = dish.price;
+                document.getElementById('dishDescription').value = dish.description;
+                document.getElementById('dishCategory').value = dish.categoryId; // Assuming categoryId is available in the dish object
+
+                // Display the image of the dish
+                const imageUrl = dish.imageUrl.replace('public', '..');
+                document.getElementById('currentImage').src = imageUrl;
+
+                // Set the dish id as a hidden input value
+                document.getElementById('dishId').value = dish.id; // Assuming dish id is available in the dish object
+            });
+
+            // Add event listener to "Изтрий" button
+            deleteButton.addEventListener('click', async () => {
+                try {
+                    const deleteResponse = await fetch(`http://localhost:3001/api/dishes/${dish.id}`, {
+                        method: 'DELETE'
+                    });
+                    if (!deleteResponse.ok) {
+                        throw new Error('Failed to delete dish');
+                    }
+                    // If deletion is successful, remove the corresponding list item from the UI
+                    listItem.remove();
+                } catch (error) {
+                    console.error('Error deleting dish:', error);
+                }
+            });
+
+
+            buttonContainer.appendChild(viewButton);
+            buttonContainer.appendChild(deleteButton);
+        
+            listItem.appendChild(dishNameSpan);
+            listItem.appendChild(buttonContainer);
+        
+            dishList.appendChild(listItem);
+        });
+        
+    } catch (error) {
+        console.error('Error fetching dishes:', error.message);
+    }
+});
+
+
+
+
+async function populateCategoryDropdown() {
+    try {
+        const response = await fetch('http://localhost:3001/api/categories');
+        if (!response.ok) {
+            throw new Error('Failed to fetch categories');
+        }
+
+        const categories = await response.json();
+        const categorySelect = document.getElementById('categorySelect');
+
+        categories.forEach(category => {
+            const option = document.createElement('option');
+            option.value = category.id;
+            option.textContent = category.name;
+            categorySelect.appendChild(option);
+        });
+    } catch (error) {
+        console.error('Error fetching categories:', error.message);
+    }
+}
 
 async function populatePositions() {
     try {

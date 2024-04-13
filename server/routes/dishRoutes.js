@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const categoryController = require('../controllers/categoryController');
+const dishController = require('../controllers/dishController');
 
 const multer = require('multer');
 
@@ -23,15 +23,17 @@ router.post('/', upload.single('srcImage'), async (req, res, next) => {
 
     const imageUrl = req.file.path; 
 
-    const { name, desc } = req.body;
+    const { name, category, price, desc } = req.body;
     
-    const newCategory = await categoryController.createCategory({
+    const newDish = await dishController.createDish({
       name,
+      category,
+      price,
       desc,
       imageUrl
     });
 
-    res.status(201).json(newCategory);
+    res.status(201).json(newDish);
   } catch (error) {
     next(error);
   }
@@ -39,7 +41,7 @@ router.post('/', upload.single('srcImage'), async (req, res, next) => {
 
 router.get('/', async (req, res, next) => {
   try {
-    const categories = await categoryController.getCategories();
+    const categories = await dishController.getCategories();
     res.json(categories);
   } catch (error) {
     next(error);
@@ -48,12 +50,12 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
   try {
-    const category = await categoryController.getCategoryById(req.params.id);
-    if (!category) {
-      res.status(404).json({ message: 'Category not found' });
+    const dish = await dishController.getDishById(req.params.id);
+    if (!dish) {
+      res.status(404).json({ message: 'Dish not found' });
       return;
     }
-    res.json(category);
+    res.json(dish);
   } catch (error) {
     next(error);
   }
@@ -66,17 +68,19 @@ router.put('/:id', upload.single('srcImage') ,async (req, res, next) => {
     }
     const imageUrl = req.file.path; 
 
-    const { name, desc } = req.body;
+    const { name, category, price, desc } = req.body;
     
-    const newCategory = {
+    const newDish  = {
       name,
+      category,
+      price,
       desc,
       imageUrl
-    };
+    }
 
 
-    const updatedCategory = categoryController.updateCategory(req.params.id, newCategory);
-    res.json(updatedCategory);
+    const updatedDish = dishController.updateDish(req.params.id, newDish);
+    res.json(updatedDish);
   } catch (error) {
     next(error);
   }
@@ -84,8 +88,8 @@ router.put('/:id', upload.single('srcImage') ,async (req, res, next) => {
 
 router.delete('/:id', async (req, res, next) => {
   try {
-    const deletedCategory = await categoryController.deleteCategory(req.params.id);
-    res.json(deletedCategory);
+    const deletedDish = await dishController.deleteDish(req.params.id);
+    res.json(deletedDish);
   } catch (error) {
     next(error);
   }
@@ -93,7 +97,7 @@ router.delete('/:id', async (req, res, next) => {
 
 router.delete('/', async (req, res, next) => {
   try {
-    const deletedCategories = await categoryController.clearCategories();
+    const deletedCategories = await dishController.clearCategories();
     res.json(deletedCategories);
   } catch (error) {
     next(error);
