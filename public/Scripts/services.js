@@ -10,7 +10,7 @@ async function displayAllServices() {
 
         services.forEach(service => {
             const section = document.createElement('section');
-            section.classList.add('container-fluid', 'p-5', 'mb-5');
+            section.classList.add('container-fluid', 'mb-2');
 
             const container = document.createElement('div');
             container.classList.add('container-fluid', 'd-flex', 'justify-content-center', 'align-items-center', 'm-0', 'p-5');
