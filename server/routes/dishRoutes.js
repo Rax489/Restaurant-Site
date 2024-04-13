@@ -41,8 +41,8 @@ router.post('/', upload.single('srcImage'), async (req, res, next) => {
 
 router.get('/', async (req, res, next) => {
   try {
-    const categories = await dishController.getCategories();
-    res.json(categories);
+    const dishes = await dishController.getDishes();
+    res.json(dishes);
   } catch (error) {
     next(error);
   }
@@ -97,8 +97,8 @@ router.delete('/:id', async (req, res, next) => {
 
 router.delete('/', async (req, res, next) => {
   try {
-    const deletedCategories = await dishController.clearCategories();
-    res.json(deletedCategories);
+    const deletedDishes = await dishController.clearDishes();
+    res.json(deletedDishes);
   } catch (error) {
     next(error);
   }

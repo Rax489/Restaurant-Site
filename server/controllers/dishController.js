@@ -12,12 +12,12 @@ async function createDish(dishData) {
     }
 }
 
-async function getCategories() {
+async function getDishes() {
     try {
-        const categories = await prisma.dish.findMany();
-        return categories;
+        const dishes = await prisma.dish.findMany();
+        return dishes;
     } catch (error) {
-        throw new Error('Error getting categories');
+        throw new Error('Error getting dishes');
     }
 }
 
@@ -63,7 +63,7 @@ async function deleteDish(dishId) {
 
 module.exports = {
     createDish,
-    getCategories,
+    getDishes,
     getDishById,
     updateDish,
     deleteDish
