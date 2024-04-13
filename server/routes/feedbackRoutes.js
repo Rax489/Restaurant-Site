@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const employeeController = require('../controllers/employeeController');
+const feedbackController = require('../controllers/feedbackController');
 
 router.post('/', async (req, res, next) => {
     try {
-        const newEmployee = await employeeController.createEmployee(req.body);
-        res.status(201).json(newEmployee);
+        console.log(JSON.stringify(req.body));
+        const newFeedback = await feedbackController.createFeedback(req.body);
+        res.status(201).json(newFeedback);
     } catch (error) {
         next(error);
     }
@@ -13,8 +14,8 @@ router.post('/', async (req, res, next) => {
 
 router.get('/', async (req, res, next) => {
     try {
-        const employees = await employeeController.getEmployees();
-        res.json(employees);
+        const feedbacks = await feedbackController.getFeedbacks();
+        res.json(feedbacks);
     } catch (error) {
         next(error);
     }
@@ -22,12 +23,12 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
     try {
-        const employee = await employeeController.getEmployeeById(req.params.id);
-        if (!employee) {
-            res.status(404).json({ message: 'Employee not found' });
+        const feedback = await feedbackController.getFeedbackById(req.params.id);
+        if (!feedback) {
+            res.status(404).json({ message: 'Feedback not found' });
             return;
         }
-        res.json(employee);
+        res.json(feedback);
     } catch (error) {
         next(error);
     }
@@ -35,8 +36,8 @@ router.get('/:id', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
     try {
-        const updatedEmployee = await employeeController.updateEmployee(req.params.id, req.body);
-        res.json(updatedEmployee);
+        const updatedFeedback = await feedbackController.updateFeedback(req.params.id, req.body);
+        res.json(updatedFeedback);
     } catch (error) {
         next(error);
     }
@@ -44,8 +45,8 @@ router.put('/:id', async (req, res, next) => {
 
 router.delete('/:id', async (req, res, next) => {
     try {
-        const deletedEmployee = await employeeController.deleteEmployee(req.params.id);
-        res.json(deletedEmployee);
+        const deletedFeedback = await feedbackController.deleteFeedback(req.params.id);
+        res.json(deletedFeedback);
     } catch (error) {
         next(error);
     }
