@@ -132,15 +132,6 @@ h1 {
     box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.1);
 }
 
-#category-salad {
-    position: relative;
-    width: 75%;
-    margin-bottom: 70px;
-    margin-top: 70px;
-    margin-left: 82px;
-    padding: 0;
-}
-
 .category-heading {
     font-family: "Roboto Condensed";
     font-weight: bold;
@@ -150,101 +141,29 @@ h1 {
     font-family: "Roboto Condensed";
 }
 
-#salad-image {
-    width: 1500px;
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4);
+.category-section {
+    position: relative !important;
+    width: 75% !important;
+    margin-bottom: 70px !important;
+    margin-top: 70px !important;
+    margin-left: 82px !important;
+    padding: 0 !important;
 }
 
-#salad-button {
+.category-content .btn {
     background-color: #041280;
     color: white;
     border-radius: 0;
     font-weight: bold;
 }
 
-#salad-button:hover {
+.category-content .btn:hover {
     background-color: white;
     color: #041280;
     border-color: #041280;
 }
 
-#category-appetizer {
-    position: relative;
-    width: 75%;
-    margin-bottom: 70px;
-    margin-top: 70px;
-    margin-left: 82px;
-    padding: 0;
-}
-
-#appetizer-image {
+.category-section .img-fluid {
     width: 1500px;
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4);
-}
-
-#appetizer-button {
-    background-color: #041280;
-    color: white;
-    border-radius: 0;
-    font-weight: bold;
-}
-
-#appetizer-button:hover {
-    background-color: white;
-    color: #041280;
-    border-color: #041280;
-}
-
-#category-main-dishes {
-    position: relative;
-    width: 75%;
-    margin-bottom: 70px;
-    margin-top: 70px;
-    margin-left: 82px;
-    padding: 0;
-}
-
-#main-dishes-image {
-    width: 1500px;
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4);
-}
-
-#main-dishes-button {
-    background-color: #041280;
-    color: white;
-    border-radius: 0;
-    font-weight: bold;
-}
-
-#main-dishes-button:hover {
-    background-color: white;
-    color: #041280;
-    border-color: #041280;
-}
-
-#category-desserts {
-    position: relative;
-    width: 75%;
-    margin-bottom: 70px;
-    margin-top: 70px;
-    margin-left: 82px;
-    padding: 0;
-}
-
-#desserts-image {
-    width: 1500px;
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4);
-}
-
-#desserts-button {
-    background-color: #041280;
-    color: white;
-    border-radius: 0;
-    font-weight: bold;
-}
-
-#desserts-button:hover {
-    background-color: white;
-    color: #041280;
-    border-color: #041280;
 }
