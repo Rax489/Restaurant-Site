@@ -129,6 +129,11 @@ main h1 {
     
 }
 
+.container-workers ul {
+    max-height: 250px;
+    overflow-y: auto;
+}
+
 .footer-content i {
     color: white;
 }
