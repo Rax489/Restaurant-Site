@@ -766,7 +766,8 @@ document.getElementById('dish-add').addEventListener('click', async (event) => {
     const dishDescription = document.getElementById('dishDescription').value;
     const dishImage = document.getElementById('dishImage').files[0];
 
-    const dishExistance = checkDishExistence(dishName);
+    const dishExistance = await checkDishExistence(dishName);
+    console.log(dishExistance);
     if(dishExistance){
         document.getElementById('dishName').value = '';
         document.getElementById('result-dish').innerHTML = "Ястие с това име вече същестува!";

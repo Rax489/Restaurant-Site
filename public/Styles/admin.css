@@ -219,7 +219,16 @@ label{
     max-width: 100%;
     height: auto;
 }
-.service-list ul {
-    max-height: 300px; /* Adjust the max height as needed */
+.service-list ul,
+.worker-list ul,
+.category-list ul,
+.dish-list ul,
+.feedback-list ul{
+    max-height: 300px; 
+    overflow-y: auto;
+}
+
+.gallery-list ul{
+    max-height: 250px; 
     overflow-y: auto;
 }
