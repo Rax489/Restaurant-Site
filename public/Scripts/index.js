@@ -57,7 +57,7 @@ async function fetchReviews() {
                 const reviewContainer = document.createElement('div');
                 reviewContainer.classList.add('review-container', 'p-3');
                 const name = document.createElement('h4');
-                name.textContent = reviewData.name;
+                name.textContent = reviewData.name.toUpperCase();
                 const starRating = document.createElement('div');
                 starRating.classList.add('star-rating', 'd-flex', 'flex-row-reverse');
                 
