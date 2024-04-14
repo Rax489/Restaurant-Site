@@ -10,7 +10,7 @@ async function displayAllServices() {
 
         services.forEach(service => {
             const section = document.createElement('section');
-            section.classList.add('container-fluid', 'mb-2');
+            section.classList.add('container-fluid', 'mt-5', 'pb-5');
 
             const container = document.createElement('div');
             container.classList.add('container-fluid', 'd-flex', 'justify-content-center', 'align-items-center', 'm-0', 'p-5');
@@ -30,7 +30,7 @@ async function displayAllServices() {
             const rightDiv = document.createElement('div');
             rightDiv.classList.add('services-right', 'col-md-6', 'm-0', 'p-0');
             const title = document.createElement('h2');
-            title.textContent = service.name;
+            title.textContent = service.name.toUpperCase();
             const description = document.createElement('p');
             description.classList.add('p-4');
             description.textContent = service.desc;

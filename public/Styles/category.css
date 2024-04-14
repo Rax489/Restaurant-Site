@@ -97,12 +97,12 @@ main{
     
     .navbar-nav {
         height: auto;
-        margin-top: 20px; /* Adjust as needed */
+        margin-top: 20px;
     }
 
     .nav-item {
         margin-right: 0;
-        margin-bottom: 10px; /* Adjust as needed */
+        margin-bottom: 10px;
     }
 
     #logo {
@@ -110,7 +110,7 @@ main{
         max-width: max-content;
         width: auto;
         height: auto;
-        margin-top: 20px; /* Adjust as needed */
+        margin-top: 20px;
     }
 
     .buttons {
