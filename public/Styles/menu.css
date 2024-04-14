@@ -106,7 +106,7 @@ header {
 
     .nav-item {
         margin-right: 0;
-        margin-bottom: 10px;
+        margin-bottom: 10px
     }
 
     #logo {
@@ -200,4 +200,25 @@ h1 {
 .category-section .img-fluid {
     width: 1500px;
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+@media (max-width: 1450px) {
+    .category-content {
+        width: 90%; /* Adjust the width to be more flexible */
+        left: 5%; /* Center the content horizontally */
+        top: 20%; /* Adjust the top positioning */
+        height: auto; /* Allow the height to grow as needed */
+    }
+
+    .category-section {
+        width: 100% !important; /* Use the full width of the container */
+        margin-left: 0 !important; /* Remove specific margins for responsiveness */
+        margin-right: 0 !important; /* Ensure it does not overflow the parent */
+    }
+
+    .category-section .img-fluid {
+        width: 100%; /* Make the image responsive */
+        height: auto; /* Maintain aspect ratio */
+        box-shadow: none; /* Optionally remove the shadow if it feels too much */
+    }
 }

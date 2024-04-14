@@ -26,7 +26,7 @@ async function displayMenuCategories() {
             }
 
             const dishColumn = document.createElement('div');
-            dishColumn.classList.add('col-md-4', 'mb-5', 'm-0');
+            dishColumn.classList.add('col-md-4', 'col-sm-6', 'mb-5', 'm-0');
 
             const dishCard = document.createElement('div');
             dishCard.classList.add('single-dish');
