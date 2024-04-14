@@ -4,7 +4,10 @@ document.addEventListener('DOMContentLoaded', async() => {
     await displayAllEmployees();
     await populatePositions();
     await displayAllCategories();
-    await populateCategoryDropdown();
+    await displayAllDishes();
+    await displayFeedback()
+    await populateCategoryDropdown('categorySelect');
+    await populateCategoryDropdown('dishCategory');
 });
 
 async function displayAllServices() {
@@ -150,6 +153,7 @@ document.getElementById('service-edit').addEventListener('click', async (event) 
 
        
         document.getElementById('service-from').reset();
+        document.getElementById('currentImage').src = '../Images/services1.png';
         document.getElementById('result-service').textContent = "";
         displayAllServices();
     } catch (error) {
@@ -248,7 +252,7 @@ document.getElementById('gallery-add').addEventListener('click', async (event) =
 
     const existingGalleryImage = await checkGalleryImageExistence(imageName);
     if (existingGalleryImage) {
-        document.getElementById('imageName').value = "";
+        document.getElementById('imageName').value = '';
       document.getElementById('result-gallery').textContent = "Снимка с това име вече съществува! Моля опитайте с друго име."
       return;
     }
@@ -306,6 +310,7 @@ document.getElementById('gallery-edit').addEventListener('click', async (event) 
 
         
         document.getElementById('gallery-form').reset();
+        document.getElementById('currentImageGallery').src='../Images/galleryAdmin.png';
         document.getElementById('result-gallery').textContent = "";
         displayAllGalleryImages();
     } catch (error) {
@@ -412,9 +417,10 @@ document.getElementById('worker-add').addEventListener('click', async (event) =>
         document.getElementById('result-employee').innerHTML = "Моля попълнете всички полета!";
         return;
     }
-    
+
     const employeeExistence = await checkEmployeeExistence(workerName);
     if(employeeExistence){
+        document.getElementById('workerName').value = '';
         document.getElementById('result-employee').innerHTML = "Работник с това име вече съществува!";
         return;
     }
@@ -476,6 +482,7 @@ document.getElementById('worker-edit').addEventListener('click', async (event) =
             throw new Error('Failed to update employee');
         }
         document.getElementById('worker-form').reset();
+        document.getElementById('currentImageEmployee').src='../Images/cook1.png';
         document.getElementById('result-employee').innerHTML = '';
         displayAllEmployees();
     } catch (error) {
@@ -640,6 +647,7 @@ document.getElementById('category-edit').addEventListener('click', async (event)
         }
 
         document.getElementById('category-form').reset();
+        document.getElementById('currentCategoryImage').src = '../Images/desserts.png';
         document.getElementById('result-category').textContent = "";
         displayAllCategories();
     } catch (error) {
@@ -662,89 +670,317 @@ async function checkCategoryExistence(categoryName) {
     }
 }
 
-document.getElementById('categorySelect').addEventListener('change', async () => {
-    const categoryElement = document.getElementById('categorySelect');
-    const categoryName = categoryElement.options[categoryElement.selectedIndex].textContent;
+async function displayAllDishes(){
+    document.getElementById('categorySelect').addEventListener('change', async () => {
+        const categoryElement = document.getElementById('categorySelect');
+        const categoryName = categoryElement.options[categoryElement.selectedIndex].textContent;
+    
+        try {
+            const response = await fetch(`http://localhost:3001/api/dishes`);
+            if (!response.ok) {
+                throw new Error('Failed to fetch dishes');
+            }
+    
+            const dishes = await response.json();
+            const filteredDishes = dishes.filter(dish => dish.category === categoryName);
+            const dishList = document.querySelector('.dish-list ul');
+    
+            dishList.innerHTML = '';
+    
+            filteredDishes.forEach(dish => {
+                const listItem = document.createElement('li');
+                listItem.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center');
+    
+                const dishNameSpan = document.createElement('span');
+                dishNameSpan.textContent = dish.name;
+            
+                const buttonContainer = document.createElement('div');
+                buttonContainer.classList.add('button-container');
+            
+                const viewButton = document.createElement('button');
+                viewButton.classList.add('btn', 'me-2');
+                viewButton.textContent = 'Разгледай';
+            
+                const deleteButton = document.createElement('button');
+                deleteButton.classList.add('btn', 'delete-btn');
+                deleteButton.textContent = 'Изтрий';
+            
+                viewButton.addEventListener('click', () => {
+                    document.getElementById('dishName').value = dish.name;
+                    document.getElementById('dishPrice').value = dish.price;
+                    document.getElementById('dishDescription').value = dish.desc;
+                
+                    const imageUrl = dish.imageUrl.replace('public', '..');
+                    document.getElementById('currentDishImage').src = imageUrl;
+                    console.log(imageUrl)
+                
+                    document.getElementById('dishId').value = dish.id;
+                
+                    const dishCategorySelect = document.getElementById('dishCategory');
+                    
+                    const matchingOption = [...dishCategorySelect.options].find(option => option.textContent === categoryName);
+                    
+                    if (matchingOption) {
+                        dishCategorySelect.value = matchingOption.value;
+                    }
+                });
+                
+    
+                deleteButton.addEventListener('click', async () => {
+                    try {
+                        const deleteResponse = await fetch(`http://localhost:3001/api/dishes/${dish.id}`, {
+                            method: 'DELETE'
+                        });
+                        if (!deleteResponse.ok) {
+                            throw new Error('Failed to delete dish');
+                        }
+                        listItem.remove();
+                    } catch (error) {
+                        console.error('Error deleting dish:', error);
+                    }
+                });
+    
+    
+                buttonContainer.appendChild(viewButton);
+                buttonContainer.appendChild(deleteButton);
+            
+                listItem.appendChild(dishNameSpan);
+                listItem.appendChild(buttonContainer);
+            
+                dishList.appendChild(listItem);
+            });
+            
+        } catch (error) {
+            console.error('Error fetching dishes:', error.message);
+        }
+    });
+}
+
+document.getElementById('dish-add').addEventListener('click', async (event) => {
+    event.preventDefault(); 
+    
+    const dishName = document.getElementById('dishName').value;
+    const dishPrice = document.getElementById('dishPrice').value;
+    const categoryElement = document.getElementById('dishCategory');
+    const dishCategory = categoryElement.options[categoryElement.selectedIndex].textContent;
+    const dishDescription = document.getElementById('dishDescription').value;
+    const dishImage = document.getElementById('dishImage').files[0];
+
+    const dishExistance = checkDishExistence(dishName);
+    if(dishExistance){
+        document.getElementById('dishName').value = '';
+        document.getElementById('result-dish').innerHTML = "Ястие с това име вече същестува!";
+        return;
+    }
+    if (!dishName || !dishPrice || !dishCategory || !dishDescription || !dishImage) {
+        document.getElementById('result-dish').innerHTML = "Моля попълнете всички полета!";
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append('name', dishName);
+    formData.append('category', dishCategory);
+    formData.append('price', dishPrice);
+    formData.append('desc', dishDescription);
+    formData.append('srcImage', dishImage);
 
     try {
-        const response = await fetch(`http://localhost:3001/api/dishes`);
-        if (!response.ok) {
-            throw new Error('Failed to fetch dishes');
-        }
-
-        const dishes = await response.json();
-        const filteredDishes = dishes.filter(dish => dish.category === categoryName);
-        const dishList = document.querySelector('.dish-list ul');
-
-        dishList.innerHTML = '';
-
-        filteredDishes.forEach(dish => {
-            const listItem = document.createElement('li');
-            listItem.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center');
-
-            const dishNameSpan = document.createElement('span');
-            dishNameSpan.textContent = dish.name;
-        
-            const buttonContainer = document.createElement('div');
-            buttonContainer.classList.add('button-container');
-        
-            const viewButton = document.createElement('button');
-            viewButton.classList.add('btn', 'me-2');
-            viewButton.textContent = 'Разгледай';
-        
-            const deleteButton = document.createElement('button');
-            deleteButton.classList.add('btn', 'delete-btn');
-            deleteButton.textContent = 'Изтрий';
-        
-            viewButton.addEventListener('click', () => {
-                document.getElementById('dishName').value = dish.name;
-                document.getElementById('dishPrice').value = dish.price;
-                document.getElementById('dishDescription').value = dish.description;
-                document.getElementById('dishCategory').value = dish.categoryId; // Assuming categoryId is available in the dish object
-
-                // Display the image of the dish
-                const imageUrl = dish.imageUrl.replace('public', '..');
-                document.getElementById('currentImage').src = imageUrl;
-
-                // Set the dish id as a hidden input value
-                document.getElementById('dishId').value = dish.id; // Assuming dish id is available in the dish object
-            });
-
-            // Add event listener to "Изтрий" button
-            deleteButton.addEventListener('click', async () => {
-                try {
-                    const deleteResponse = await fetch(`http://localhost:3001/api/dishes/${dish.id}`, {
-                        method: 'DELETE'
-                    });
-                    if (!deleteResponse.ok) {
-                        throw new Error('Failed to delete dish');
-                    }
-                    // If deletion is successful, remove the corresponding list item from the UI
-                    listItem.remove();
-                } catch (error) {
-                    console.error('Error deleting dish:', error);
-                }
-            });
-
-
-            buttonContainer.appendChild(viewButton);
-            buttonContainer.appendChild(deleteButton);
-        
-            listItem.appendChild(dishNameSpan);
-            listItem.appendChild(buttonContainer);
-        
-            dishList.appendChild(listItem);
+        const response = await fetch('http://localhost:3001/api/dishes', {
+            method: 'POST',
+            body: formData
         });
-        
+        if (!response.ok) {
+            throw new Error('Failed to add dish');
+        }
+        document.getElementById('dish-form').reset();
+        document.getElementById('result-dish').innerHTML = "";
+        displayAllDishes();
     } catch (error) {
-        console.error('Error fetching dishes:', error.message);
+        console.error('Error adding dish:', error);
     }
 });
 
+document.getElementById('dish-edit').addEventListener('click', async (event) => {
+    event.preventDefault();
+    
+    const dishId = document.getElementById('dishId').value;
+    const dishName = document.getElementById('dishName').value;
+    const dishPrice = document.getElementById('dishPrice').value;
+    const categoryElement = document.getElementById('dishCategory');
+    const dishCategory = categoryElement.options[categoryElement.selectedIndex].textContent;
+    const dishDescription = document.getElementById('dishDescription').value;
+    const dishImage = document.getElementById('dishImage').files[0];
 
+    if (!dishId) {
+        document.getElementById('result-dish').innerHTML = "Моля първо изберете ястие!";
+        return;
+    } else {
+        if (!dishName || !dishPrice || !dishCategory || !dishDescription || !dishImage) {
+            document.getElementById('result-dish').innerHTML = "Моля попълнете всички полета!";
+            return;
+        }
+    }
 
+    const formData = new FormData();
+    formData.append('name', dishName);
+    formData.append('category', dishCategory);
+    formData.append('price', dishPrice);
+    formData.append('desc', dishDescription);
+    formData.append('srcImage', dishImage);
 
-async function populateCategoryDropdown() {
+    try {
+        const response = await fetch(`http://localhost:3001/api/dishes/${dishId}`, {
+            method: 'PUT',
+            body: formData
+        });
+        if (!response.ok) {
+            throw new Error('Failed to update dish');
+        }
+        document.getElementById('dish-form').reset();
+        document.getElementById('currentDishImage').src = '../Images/salad.png';
+        document.getElementById('result-dish').innerHTML = '';
+        displayAllDishes();
+    } catch (error) {
+        console.error('Error updating dish:', error);
+    }
+});
+
+async function checkDishExistence(dishName) {
+    try {
+        const response = await fetch('http://localhost:3001/api/dishes');
+        if (!response.ok) {
+            throw new Error('Failed to fetch dishes');
+        }
+        const dishes = await response.json();
+        const existingDish = dishes.find(dish => dish.name === dishName);
+        return !!existingDish;
+    } catch (error) {
+        console.error('Error:', error.message);
+        throw error;
+    }
+}
+
+async function displayFeedback() {
+    try {
+        const response = await fetch('http://localhost:3001/api/feedback');
+        if (!response.ok) {
+            throw new Error('Failed to fetch feedback');
+        }
+
+        const feedbackData = await response.json();
+
+        const feedbackList = document.querySelector('.feedback-list ul');
+
+        feedbackData.forEach(feedback => {
+            if(feedback.isApproved === false) {
+                const feedbackItem = document.createElement('li');
+                feedbackItem.classList.add('feedback-item');
+
+                const rowDiv = document.createElement('div');
+                rowDiv.classList.add('row', 'mb-5');
+
+                const col10Div = document.createElement('div');
+                col10Div.classList.add('col-md-10');
+
+                const feedbackContentDiv = document.createElement('div');
+                feedbackContentDiv.classList.add('feedback-content');
+
+                const namePara = document.createElement('p');
+                namePara.innerHTML = `<strong>Име:</strong> ${feedback.name}`;
+
+                const starsPara = document.createElement('p');
+                starsPara.innerHTML = `<strong>Звезди:</strong> ${feedback.rating}`;
+
+                const reviewPara = document.createElement('p');
+                reviewPara.innerHTML = `<strong>Отзив:</strong> ${feedback.content}`;
+
+                feedbackContentDiv.appendChild(namePara);
+                feedbackContentDiv.appendChild(starsPara);
+                feedbackContentDiv.appendChild(reviewPara);
+                col10Div.appendChild(feedbackContentDiv);
+                rowDiv.appendChild(col10Div);
+
+                const col2Div = document.createElement('div');
+                col2Div.classList.add('col-md-2');
+
+                const buttonContainerDiv = document.createElement('div');
+                buttonContainerDiv.classList.add('button-container');
+
+                const approveColDiv = document.createElement('div');
+                approveColDiv.classList.add('col', 'text-center', 'add-btn');
+
+                const approveButton = document.createElement('button');
+                approveButton.classList.add('btn');
+                approveButton.textContent = 'ОДОБРИ';
+
+                approveButton.addEventListener('click', async () => {
+                    try {
+                        const response = await fetch(`http://localhost:3001/api/feedback/${feedback.id}`, {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                isApproved: true
+                            })
+                        });
+
+                        if (!response.ok) {
+                            throw new Error('Failed to approve feedback');
+                        }
+
+                        feedbackList.removeChild(feedbackItem);
+
+                        console.log('Feedback approved successfully');
+                    } catch (error) {
+                        console.error('Error approving feedback:', error.message);
+                    }
+                });
+                
+                approveColDiv.appendChild(approveButton);
+
+                const deleteColDiv = document.createElement('div');
+                deleteColDiv.classList.add('col', 'text-center', 'delete-btn', 'mt-3');
+
+                const deleteButton = document.createElement('button');
+                deleteButton.classList.add('btn');
+                deleteButton.textContent = 'ИЗТРИЙ';
+
+                deleteButton.addEventListener('click', async () => {
+                    try {
+                        const response = await fetch(`http://localhost:3001/api/feedback/${feedback.id}`, {
+                            method: 'DELETE'
+                        });
+                
+                        if (!response.ok) {
+                            throw new Error('Failed to delete feedback');
+                        }
+                
+                        console.log('Feedback deleted successfully');
+                        feedbackList.removeChild(feedbackItem);
+                    } catch (error) {
+                        console.error('Error deleting feedback:', error.message);
+                    }
+                });
+
+                deleteColDiv.appendChild(deleteButton);
+
+                buttonContainerDiv.appendChild(approveColDiv);
+                buttonContainerDiv.appendChild(deleteColDiv);
+                col2Div.appendChild(buttonContainerDiv);
+                rowDiv.appendChild(col2Div);
+
+                feedbackItem.appendChild(rowDiv);
+                feedbackList.appendChild(feedbackItem);
+            }    
+        });
+
+    } catch (error) {
+        console.error('Error:', error.message);
+    }
+}
+
+async function populateCategoryDropdown(selectId) {
     try {
         const response = await fetch('http://localhost:3001/api/categories');
         if (!response.ok) {
@@ -752,16 +988,16 @@ async function populateCategoryDropdown() {
         }
 
         const categories = await response.json();
-        const categorySelect = document.getElementById('categorySelect');
+        const selectElement = document.getElementById(selectId);
 
         categories.forEach(category => {
             const option = document.createElement('option');
             option.value = category.id;
             option.textContent = category.name;
-            categorySelect.appendChild(option);
+            selectElement.appendChild(option);
         });
     } catch (error) {
-        console.error('Error fetching categories:', error.message);
+        console.error(`Error fetching categories for ${selectId}:`, error.message);
     }
 }
 
@@ -786,4 +1022,3 @@ async function populatePositions() {
         console.error('Error fetching positions:', error.message);
     }
 }
-

@@ -78,7 +78,6 @@ router.put('/:id', upload.single('srcImage') ,async (req, res, next) => {
       imageUrl
     }
 
-
     const updatedDish = dishController.updateDish(req.params.id, newDish);
     res.json(updatedDish);
   } catch (error) {
