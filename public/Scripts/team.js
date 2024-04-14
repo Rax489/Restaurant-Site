@@ -17,7 +17,7 @@ async function displayAllEmployees() {
             const listItem = document.createElement('li');
             listItem.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center');
             const span = document.createElement('span');
-            span.textContent = employee.name;
+            span.textContent = employee.name.toUpperCase();
             const showBtn = document.createElement('button');
             showBtn.classList.add('btn', 'me-2');
             showBtn.textContent = "ИЗБЕРИ";
@@ -43,7 +43,7 @@ async function displayAllEmployees() {
                                 <img src="${imageUrl}" alt="Worker Image" class="img-fluid">
                             </div>
                             <div class="container-header-details col-md-6 p-4 d-flex flex-column justify-content-center">
-                                <h4>${employeeDetails.name}</h4>
+                                <h4>${employeeDetails.name.toUpperCase()}</h4>
                                 <p class="mb-3">${employeeDetails.position}</p>
                                 <h5 class="mt-3">ПРОФЕСИОНАЛЕН ОПИТ</h5>
                                 <p>${employeeDetails.exp}</p>
