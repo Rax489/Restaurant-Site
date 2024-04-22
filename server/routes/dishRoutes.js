@@ -61,27 +61,34 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-router.put('/:id', upload.single('srcImage') ,async (req, res, next) => {
+router.put('/:id', upload.single('srcImage'), async (req, res, next) => {
   try {
-    if (!req.file) {
-      throw new Error('No file uploaded');
-    }
-    const imageUrl = req.file.path; 
+      const { name, category, price, desc } = req.body;
+      let imageUrl;
 
-    const { name, category, price, desc } = req.body;
-    
-    const newDish  = {
-      name,
-      category,
-      price,
-      desc,
-      imageUrl
-    }
+      if (req.file) {
+          imageUrl = req.file.path;
+      } else {
+          const existingDish = await dishController.getDishById(req.params.id);
+          if (!existingDish) {
+              return res.status(404).json({ message: 'Dish not found' });
+          }
+          imageUrl = existingDish.imageUrl;
+      }
 
-    const updatedDish = dishController.updateDish(req.params.id, newDish);
-    res.json(updatedDish);
+      const newDish = {
+          name,
+          category,
+          price,
+          desc,
+          imageUrl
+      };
+
+      const updatedDish = await dishController.updateDish(req.params.id, newDish);
+      res.status(200).json(updatedDish);
   } catch (error) {
-    next(error);
+      console.error('Error updating dish:', error);
+      next(error);
   }
 });
 

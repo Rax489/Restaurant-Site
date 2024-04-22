@@ -1,6 +1,18 @@
 document.getElementById('review-button').addEventListener('click', async (event) => {
     event.preventDefault(); 
 
+    try {
+        const response = await fetch('http://localhost:3001/api/sessions');
+        const session = await response.json();
+        const isLoggedIn = session && session.length > 0;
+        if (!isLoggedIn) {
+            window.location.href = "login.html";
+            return;
+        }
+      } catch (error) {
+        console.error('Error checking login status:', error);
+      }
+
     const userName = document.getElementById('uname').value;
     const rating = parseInt(document.querySelector('input[name="rating"]:checked').value);
     const description = document.getElementById('msg').value;

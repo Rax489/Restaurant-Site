@@ -60,29 +60,35 @@ router.get('/:id', async (req, res, next) => {
     }
 });
 
-router.put('/:id', upload.single('srcImage') ,async (req, res, next) => {
-    try {
-      if (!req.file) {
-        throw new Error('No file uploaded');
-      }
-      const imageUrl = req.file.path; 
-  
+router.put('/:id', upload.single('srcImage'), async (req, res, next) => {
+  try {
       const { name, position, exp } = req.body;
-      
+
+      let imageUrl;
+
+      if (req.file) {
+          imageUrl = req.file.path;
+      } else {
+          const existingEmployee = await employeeController.getEmployeeById(req.params.id);
+          if (!existingEmployee) {
+              return res.status(404).json({ message: 'Employee not found' });
+          }
+          imageUrl = existingEmployee.imageUrl;
+      }
+
       const newEmployee = {
-        name,
-        position,
-        exp,
-        imageUrl
+          name,
+          position,
+          exp,
+          imageUrl
       };
-  
-  
-      const updatedEmployee = employeeController.updateEmployee(req.params.id, newEmployee);
-      res.json(updatedEmployee);
-    } catch (error) {
+      const updatedEmployee = await employeeController.updateEmployee(req.params.id, newEmployee);
+      res.status(200).json(updatedEmployee);
+  } catch (error) {
+      console.error('Error updating employee:', error);
       next(error);
-    }
-  });
+  }
+});
 
 router.delete('/:id', async (req, res, next) => {
     try {

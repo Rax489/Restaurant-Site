@@ -45,6 +45,20 @@ async function displayAllServices() {
             deleteButton.textContent = 'Изтрий';
 
             deleteButton.addEventListener('click', async () => {
+                if (!deleteButton.classList.contains('confirm')) {
+                    deleteButton.classList.add('confirm');
+                    deleteButton.textContent = 'Потвърди изтриване';
+                    deleteButton.style.backgroundColor = 'darkred';
+            
+                    setTimeout(() => {
+                        deleteButton.classList.remove('confirm');
+                        deleteButton.textContent = 'Изтрий';
+                        deleteButton.style.backgroundColor = '';
+                    }, 3000);
+            
+                    return;
+                }
+            
                 try {
                     const deleteResponse = await fetch(`http://localhost:3001/api/services/${service.id}`, {
                         method: 'DELETE'
@@ -55,8 +69,13 @@ async function displayAllServices() {
                     displayAllServices();
                 } catch (error) {
                     console.error('Error deleting service:', error);
+                } finally {
+                    deleteButton.classList.remove('confirm');
+                    deleteButton.textContent = 'Изтрий';
+                    deleteButton.style.backgroundColor = ''; 
                 }
             });
+            
             viewButton.addEventListener('click', () => {
                 document.getElementById('serviceName').value = service.name;
                 document.getElementById('serviceDescription').value = service.desc;
@@ -125,20 +144,22 @@ document.getElementById('service-edit').addEventListener('click', async (event) 
     const serviceDescription = document.getElementById('serviceDescription').value;
     const serviceImage = document.getElementById('serviceImage').files[0];
 
-    if (!serviceName ||!serviceDescription || !serviceImage) {
-        document.getElementById('result-service').textContent = "Моля, попълнете име, описание и качете изображение.";
-        return;
-    }
-
     if (!serviceId) {
         document.getElementById('result-service').textContent = "Моля първо изберете услуга!";
         return;
+    }else{
+        if (!serviceName ||!serviceDescription) {
+            document.getElementById('result-service').textContent = "Моля, попълнете име, описание и качете изображение.";
+            return;
+        }
     }
 
     const formData = new FormData();
     formData.append('name', serviceName);
     formData.append('desc', serviceDescription);
-    formData.append('srcImage', serviceImage);
+    if (serviceImage) {
+        formData.append('srcImage', serviceImage);
+    }
 
 
     try {
@@ -208,6 +229,17 @@ async function displayAllGalleryImages() {
             deleteButton.textContent = 'Изтрий';
 
             deleteButton.addEventListener('click', async () => {
+                if (!deleteButton.classList.contains('confirm')) {
+                    deleteButton.classList.add('confirm');
+                    deleteButton.textContent = 'Потвърди изтриване';
+                    deleteButton.style.backgroundColor = 'darkred';
+                    setTimeout(() => {
+                        deleteButton.classList.remove('confirm');
+                        deleteButton.textContent = 'Изтрий';
+                        deleteButton.style.backgroundColor = '';
+                    }, 3000);
+                    return;
+                }
                 try {
                     const deleteResponse = await fetch(`http://localhost:3001/api/gallery/${image.id}`, {
                         method: 'DELETE'
@@ -218,8 +250,13 @@ async function displayAllGalleryImages() {
                     displayAllGalleryImages();
                 } catch (error) {
                     console.error('Error deleting gallery image:', error);
+                } finally {
+                    deleteButton.classList.remove('confirm');
+                    deleteButton.textContent = 'Изтрий';
+                    deleteButton.style.backgroundColor = '';
                 }
             });
+            
 
             viewButton.addEventListener('click', () => {
                 document.getElementById('imageName').value = image.name;
@@ -284,14 +321,14 @@ document.getElementById('gallery-edit').addEventListener('click', async (event) 
     const imageName = document.getElementById('imageName').value;
     const newImage = document.getElementById('newImage').files[0];
 
-    if (!imageName || !imageFile) {
-        document.getElementById('result-gallery').textContent = "Моля, попълнете име и качете изображение.";
-        return;
-    }
-
     if (!galleryImageId) {
         document.getElementById('result-gallery').textContent = "Моля първо изберете изображение от галерията!";
         return;
+    }else{
+        if (!imageName || !newImage) {
+            document.getElementById('result-gallery').textContent = "Моля, попълнете име и качете изображение.";
+            return;
+        }
     }
 
     const formData = new FormData();
@@ -365,6 +402,17 @@ async function displayAllEmployees() {
             deleteButton.textContent = 'Изтрий';
 
             deleteButton.addEventListener('click', async () => {
+                if (!deleteButton.classList.contains('confirm')) {
+                    deleteButton.classList.add('confirm');
+                    deleteButton.textContent = 'Потвърди изтриване';
+                    deleteButton.style.backgroundColor = 'darkred';
+                    setTimeout(() => {
+                        deleteButton.classList.remove('confirm');
+                        deleteButton.textContent = 'Delete';
+                        deleteButton.style.backgroundColor = '';
+                    }, 3000);
+                    return;
+                }
                 try {
                     const deleteResponse = await fetch(`http://localhost:3001/api/employees/${employee.id}`, {
                         method: 'DELETE'
@@ -375,8 +423,13 @@ async function displayAllEmployees() {
                     displayAllEmployees();
                 } catch (error) {
                     console.error('Error deleting employee:', error);
+                } finally {
+                    deleteButton.classList.remove('confirm');
+                    deleteButton.textContent = 'Delete';
+                    deleteButton.style.backgroundColor = '';
                 }
             });
+            
 
             viewButton.addEventListener('click', () => {
                 document.getElementById('workerName').value = employee.name;
@@ -387,7 +440,7 @@ async function displayAllEmployees() {
                         break;
                     }
                 }
-                document.getElementById('workerExperience').value = employee.exp; // Assuming 'exp' is the property name for experience
+                document.getElementById('workerExperience').value = employee.exp;
                 const imageUrl = employee.imageUrl.replace('public', '..');
                 document.getElementById('currentImageEmployee').src = imageUrl;
                 document.getElementById('workerId').value = employee.id;
@@ -459,9 +512,9 @@ document.getElementById('worker-edit').addEventListener('click', async (event) =
 
     if(!workerId){
         document.getElementById('result-employee').innerHTML = "Моля изберете работник първо!";
-        return;
+        return; 
     }else{
-        if(!workerName || !workerPosition || !workerExperience || !workerImage){
+        if(!workerName || !workerPosition || !workerExperience){
             document.getElementById('result-employee').innerHTML = "Моля попълнете всички полета!";
             return;
         }
@@ -471,7 +524,9 @@ document.getElementById('worker-edit').addEventListener('click', async (event) =
     formData.append('name', workerName);
     formData.append('position', workerPosition);
     formData.append('exp', workerExperience);
-    formData.append('srcImage', workerImage);
+    if (workerImage) {
+        formData.append('srcImage', workerImage);
+    }
 
     try {
         const response = await fetch(`http://localhost:3001/api/employees/${workerId}`, {
@@ -540,6 +595,20 @@ async function displayAllCategories() {
             deleteButton.textContent = 'Изтрий';
 
             deleteButton.addEventListener('click', async () => {
+                if (!deleteButton.classList.contains('confirm')) {
+                    deleteButton.classList.add('confirm');
+                    deleteButton.textContent = 'Потвърди изтриване';
+                    deleteButton.style.backgroundColor = 'darkred';
+            
+                    setTimeout(() => {
+                        deleteButton.classList.remove('confirm');
+                        deleteButton.textContent = 'Delete';
+                        deleteButton.style.backgroundColor = '';  
+                    }, 3000);
+            
+                    return;
+                }
+            
                 try {
                     const deleteResponse = await fetch(`http://localhost:3001/api/categories/${category.id}`, {
                         method: 'DELETE'
@@ -550,8 +619,13 @@ async function displayAllCategories() {
                     displayAllCategories();
                 } catch (error) {
                     console.error('Error deleting category:', error);
+                } finally {
+                    deleteButton.classList.remove('confirm');
+                    deleteButton.textContent = 'Delete';
+                    deleteButton.style.backgroundColor = '';
                 }
             });
+            
             viewButton.addEventListener('click', () => {
                 document.getElementById('categoryName').value = category.name;
                 document.getElementById('categoryDescription').value = category.desc;
@@ -624,8 +698,8 @@ document.getElementById('category-edit').addEventListener('click', async (event)
         document.getElementById('result-category').textContent = "Моля първо изберете категория!";
         return;
     } else {
-        if (!categoryName || !categoryDescription || !categoryImage) {
-            document.getElementById('result-category').textContent = "Моля, попълнете име, описание и качете изображение.";
+        if (!categoryName || !categoryDescription) {
+            document.getElementById('result-category').textContent = "Моля, попълнете име и описание!";
             return;
         }
     }
@@ -633,8 +707,9 @@ document.getElementById('category-edit').addEventListener('click', async (event)
     const formData = new FormData();
     formData.append('name', categoryName);
     formData.append('desc', categoryDescription);
-    formData.append('srcImage', categoryImage);
-
+    if(categoryImage){
+        formData.append('srcImage', categoryImage);
+    }
 
     try {
         const response = await fetch(`http://localhost:3001/api/categories/${categoryId}`, {
@@ -727,6 +802,22 @@ async function displayAllDishes(){
                 
     
                 deleteButton.addEventListener('click', async () => {
+                    if (!deleteButton.classList.contains('confirm')) {
+                        deleteButton.classList.add('confirm');
+                        deleteButton.textContent = 'Потвърди изтриване';
+                        deleteButton.style.backgroundColor = 'darkred';
+                
+                        setTimeout(() => {
+                            if (deleteButton.classList.contains('confirm')) {
+                                deleteButton.classList.remove('confirm');
+                                deleteButton.textContent = 'Delete';
+                                deleteButton.style.backgroundColor = '';
+                            }
+                        }, 3000);
+                
+                        return;
+                    }
+                
                     try {
                         const deleteResponse = await fetch(`http://localhost:3001/api/dishes/${dish.id}`, {
                             method: 'DELETE'
@@ -737,8 +828,13 @@ async function displayAllDishes(){
                         listItem.remove();
                     } catch (error) {
                         console.error('Error deleting dish:', error);
+                    } finally {
+                        deleteButton.classList.remove('confirm');
+                        deleteButton.textContent = 'Delete';
+                        deleteButton.style.backgroundColor = '';
                     }
                 });
+                
     
     
                 buttonContainer.appendChild(viewButton);
@@ -816,7 +912,7 @@ document.getElementById('dish-edit').addEventListener('click', async (event) => 
         document.getElementById('result-dish').innerHTML = "Моля първо изберете ястие!";
         return;
     } else {
-        if (!dishName || !dishPrice || !dishCategory || !dishDescription || !dishImage) {
+        if (!dishName || !dishPrice || !dishCategory || !dishDescription) {
             document.getElementById('result-dish').innerHTML = "Моля попълнете всички полета!";
             return;
         }
@@ -827,7 +923,9 @@ document.getElementById('dish-edit').addEventListener('click', async (event) => 
     formData.append('category', dishCategory);
     formData.append('price', dishPrice);
     formData.append('desc', dishDescription);
-    formData.append('srcImage', dishImage);
+    if(dishImage){
+        formData.append('srcImage', dishImage);
+    }
 
     try {
         const response = await fetch(`http://localhost:3001/api/dishes/${dishId}`, {

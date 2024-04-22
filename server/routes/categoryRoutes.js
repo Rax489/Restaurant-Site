@@ -59,26 +59,32 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-router.put('/:id', upload.single('srcImage') ,async (req, res, next) => {
+router.put('/:id', upload.single('srcImage'), async (req, res, next) => {
   try {
-    if (!req.file) {
-      throw new Error('No file uploaded');
-    }
-    const imageUrl = req.file.path; 
+      const { name, description } = req.body;
+      let imageUrl;
 
-    const { name, desc } = req.body;
-    
-    const newCategory = {
-      name,
-      desc,
-      imageUrl
-    };
+      if (req.file) {
+          imageUrl = req.file.path; 
+      } else {
+          const existingCategory = await categoryController.getCategoryById(req.params.id);
+          if (!existingCategory) {
+              return res.status(404).json({ message: 'Category not found' });
+          }
+          imageUrl = existingCategory.imageUrl;
+      }
 
+      const categoryData = {
+          name,
+          description,
+          imageUrl
+      };
 
-    const updatedCategory = categoryController.updateCategory(req.params.id, newCategory);
-    res.json(updatedCategory);
+      const updatedCategory = await categoryController.updateCategory(req.params.id, categoryData);
+      res.status(200).json(updatedCategory);
   } catch (error) {
-    next(error);
+      console.error('Error updating category:', error);
+      next(error);
   }
 });
 

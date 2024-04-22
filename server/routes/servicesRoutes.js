@@ -59,27 +59,33 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-router.put('/:id', upload.single('srcImage') ,async (req, res, next) => {
+router.put('/:id', upload.single('srcImage'), async (req, res, next) => {
   try {
-    if (!req.file) {
-      throw new Error('No file uploaded');
-    }
-    const imageUrl = req.file.path; 
+      const { name, desc } = req.body;
+      let imageUrl;
 
-    const { name, desc } = req.body;
-    
-    const newService = {
-      name,
-      desc,
-      imageUrl
-    };
+      if (req.file) {
+          imageUrl = req.file.path;
+      } else {
+          const service = await serviceController.getServiceById(req.params.id);
+          if (!service) {
+              res.status(404).json({ message: 'Service not found' });
+              return;
+          }
+          imageUrl = service.imageUrl;
+      }
 
-    console.log(newService)
+      const newService = {
+          name,
+          desc,
+          imageUrl
+      };
 
-    const updatedService = serviceController.updateService(req.params.id, newService);
-    res.json(updatedService);
+      const updatedService = await serviceController.updateService(req.params.id, newService);
+      res.status(200).json(updatedService);
   } catch (error) {
-    next(error);
+      console.log('Error in PUT /:id:', error);
+      res.status(500).json({ message: 'Error updating service' });
   }
 });
 
